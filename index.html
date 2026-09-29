@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="uz">
-<head>
-<meta charset="utf-8">
+<html lang="uz"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ONSPORTS.UZ</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -9,8 +7,9 @@
 :root{--bg:#0b1220;--card:#131c30;--line:#22304d;--tx:#eef2fa;--mu:#8a98b5;--ac:#2fd08a;--live:#ff5a5f}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;padding-bottom:76px}
-header{padding:18px 16px 6px;font-size:22px;font-weight:800}
+header{display:flex;justify-content:space-between;align-items:center;padding:18px 16px 6px;font-size:22px;font-weight:800}
 header span{color:var(--ac)}
+header button{background:none;border:1px solid var(--line);color:var(--tx);border-radius:99px;padding:5px 12px;font:600 13px system-ui}
 .chips{display:flex;gap:8px;padding:8px 16px;overflow-x:auto}
 .chip{border:1px solid var(--line);background:none;color:var(--mu);padding:7px 14px;border-radius:99px;font:inherit;white-space:nowrap}
 .chip.on{background:var(--ac);border-color:var(--ac);color:#052015;font-weight:700}
@@ -18,7 +17,7 @@ h3{margin:16px 16px 6px;font-size:14px;color:var(--mu);font-weight:600}
 .m{display:grid;grid-template-columns:1fr 64px 1fr;align-items:center;gap:8px;background:var(--card);margin:6px 16px;padding:12px;border-radius:14px}
 .t{display:flex;align-items:center;gap:8px;min-width:0}
 .t.r{justify-content:flex-end;text-align:right}
-.t img,.row img{width:22px;height:22px;object-fit:contain;flex:none}
+img{width:22px;height:22px;object-fit:contain;flex:none}
 .t b{font-weight:600;overflow:hidden;text-overflow:ellipsis}
 .c{text-align:center;font-size:18px;font-weight:800}
 .c small{display:block;font-size:11px;font-weight:600;color:var(--mu)}
@@ -29,65 +28,137 @@ h3{margin:16px 16px 6px;font-size:14px;color:var(--mu);font-weight:600}
 .row .n span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .row>*:nth-child(n+3){text-align:right}
 .empty{text-align:center;color:var(--mu);padding:40px 16px}
+.news{display:block;margin:6px 16px;padding:12px;background:var(--card);border-radius:14px;color:var(--tx);text-decoration:none}
+.news small{display:block;color:var(--mu);margin-top:4px;font-size:12px}
 nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:#0f1729;border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0)}
-nav button{flex:1;background:none;border:0;color:var(--mu);padding:14px;font:600 14px system-ui}
+nav button{flex:1;background:none;border:0;color:var(--mu);padding:14px 4px;font:600 13px system-ui}
 nav button.on{color:var(--ac)}
-</style>
-</head>
+#ov{position:fixed;inset:0;background:var(--bg);overflow:auto;padding-bottom:40px;display:none;z-index:5}
+#ov.on{display:block}
+.top{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;position:sticky;top:0;background:var(--bg)}
+.top button{background:none;border:0;color:var(--ac);font:700 15px system-ui}
+.big{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;text-align:center;padding:10px 16px 18px}
+.big img{width:44px;height:44px;margin:0 auto 6px;display:block}
+.big .s{font-size:32px;font-weight:800}
+.ev{display:flex;gap:10px;margin:0 16px;padding:8px 0;border-bottom:1px solid var(--line)}
+.ev i{color:var(--mu);font-style:normal;width:34px;flex:none}
+.pick{display:grid;place-items:center;min-height:80vh;gap:14px;padding:16px;align-content:center}
+.pick button{width:240px;padding:14px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--tx);font:700 16px system-ui}
+</style></head>
 <body>
-<header><span>ONSPORTS</span>.UZ</header>
+<header><div><span>ONSPORTS</span>.UZ</div><button id="lb">🌐</button></header>
 <div id="chips" class="chips"></div>
-<main id="out"><div class="empty">Yuklanmoqda…</div></main>
-<nav><button data-t="m" class="on">O'yinlar</button><button data-t="t">Jadval</button></nav>
+<main id="out"></main>
+<nav><button data-t="h"></button><button data-t="m"></button><button data-t="c"></button></nav>
+<div id="ov"></div>
 <script>
-// GITHUB_USER ni o'zingizniki bilan almashtiring
 const RAW="https://raw.githubusercontent.com/jasurumirov0622-ux/futbolchi-app/main/data.json";
-const LG={PL:"Angliya",PD:"La Liga",SA:"Serie A",BL1:"Bundesliga",FL1:"Liga 1",CL:"Chempionlar ligasi"};
-let D={matches:[],tables:{}},tab="m",day=0,lg="PD";
+const LG={PL:"Premier League",PD:"La Liga",SA:"Serie A",BL1:"Bundesliga",FL1:"Ligue 1",CL:"Champions League"};
+const I={
+uz:{h:"Bosh sahifa",m:"O'yinlar",c:"Musobaqalar",y:"Kecha",t:"Bugun",n:"Ertaga",news:"Futbol yangiliklari",live:"JONLI",ft:"Tugadi",none:"Bu kunda o'yinlar yo'q",soon:"Eng yaqin o'yinlar",load:"Yuklanmoqda…",err:"Ma'lumot yuklanmadi",x:"Yopish",goals:"Gollar",cards:"Kartochkalar",nodet:"Tafsilotlar hali yo'q",fix:"Jamoa o'yinlari",pick:"Tilni tanlang",nt:"Jadval hali tayyor emas",tm:"Jamoa",pt:"Ochko",og:"Avtogol",pen:"Penalti"},
+ru:{h:"Главная",m:"Матчи",c:"Турниры",y:"Вчера",t:"Сегодня",n:"Завтра",news:"Футбольные новости",live:"LIVE",ft:"Завершён",none:"В этот день матчей нет",soon:"Ближайшие матчи",load:"Загрузка…",err:"Не удалось загрузить данные",x:"Закрыть",goals:"Голы",cards:"Карточки",nodet:"Подробностей пока нет",fix:"Матчи команды",pick:"Выберите язык",nt:"Таблица пока не готова",tm:"Команда",pt:"Очки",og:"Автогол",pen:"Пенальти"},
+en:{h:"Home",m:"Matches",c:"Competitions",y:"Yesterday",t:"Today",n:"Tomorrow",news:"Football news",live:"LIVE",ft:"FT",none:"No matches on this day",soon:"Upcoming matches",load:"Loading…",err:"Failed to load data",x:"Close",goals:"Goals",cards:"Cards",nodet:"No details yet",fix:"Team matches",pick:"Choose language",nt:"Table not ready yet",tm:"Team",pt:"Pts",og:"Own goal",pen:"Penalty"}};
+const NAMES={uz:"🇺🇿 O'zbekcha",ru:"🇷🇺 Русский",en:"🇬🇧 English"};
+let D={matches:[],tables:{},news:[],detail:{}},tab="h",day=0,lg="PD",L=null;
 const $=s=>document.querySelector(s);
 const tg=window.Telegram&&Telegram.WebApp;if(tg){tg.ready();tg.expand();}
+const st=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){}};
+const T=k=>I[L][k];
 const img=u=>u?`<img src="${u}" alt="" loading="lazy">`:"";
-const esc=s=>String(s??"").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const tm=u=>new Date(u).toLocaleTimeString("ru",{hour:"2-digit",minute:"2-digit"});
 
-function chips(){
-  const list=tab==="m"?[["-1","Kecha"],["0","Bugun"],["1","Ertaga"]]:Object.entries(LG);
-  const cur=tab==="m"?String(day):lg;
-  $("#chips").innerHTML=list.map(([k,v])=>`<button class="chip ${k===cur?"on":""}" data-k="${k}">${v}</button>`).join("");
+function pickLang(){
+  $("#chips").innerHTML="";$("nav").style.display="none";
+  $("#out").innerHTML=`<div class="pick"><h3 style="margin:0;font-size:18px;color:var(--tx)">🌐 Til · Язык · Language</h3>`+
+    Object.keys(NAMES).map(k=>`<button data-l="${k}">${NAMES[k]}</button>`).join("")+`</div>`;
 }
-function matches(){
-  const key=new Date(Date.now()+day*864e5).toLocaleDateString("sv");
-  const ms=D.matches.filter(m=>new Date(m.utc).toLocaleDateString("sv")===key).sort((a,b)=>a.utc<b.utc?-1:1);
-  if(!ms.length){
-    const up=D.matches.filter(m=>new Date(m.utc)>new Date()&&m.st!=="FINISHED").sort((a,b)=>a.utc<b.utc?-1:1).slice(0,10);
-    if(!up.length)return `<div class="empty">Bu kunda o'yinlar yo'q</div>`;
-    return `<div class="empty">Bu kunda o'yinlar yo'q. Eng yaqin o'yinlar:</div>`+cards(up,true);
-  }
-  return cards(ms,false);
+function chips(){
+  let list,cur;
+  if(tab==="m"){list=[["-1",T("y")],["0",T("t")],["1",T("n")]];cur=String(day);}
+  else if(tab==="c"){list=Object.entries(LG);cur=lg;}
+  else{$("#chips").innerHTML="";return;}
+  $("#chips").innerHTML=list.map(([k,v])=>`<button class="chip ${k===cur?"on":""}" data-k="${k}">${v}</button>`).join("");
 }
 function cards(ms,dt){
   let comp="",h="";
   for(const m of ms){
     if(m.comp!==comp){comp=m.comp;h+=`<h3>${esc(comp)}</h3>`;}
     const live=m.st==="IN_PLAY"||m.st==="PAUSED",done=m.st==="FINISHED";
-    const time=new Date(m.utc).toLocaleTimeString("ru",{hour:"2-digit",minute:"2-digit"});
-    const mid=live||done?`<div class="c ${live?"live":""}">${m.hs??0} : ${m.as??0}<small>${live?"JONLI":"Tugadi"}</small></div>`:`<div class="c">${time}${dt?`<small>${new Date(m.utc).toLocaleDateString("ru",{day:"2-digit",month:"2-digit"})}</small>`:""}</div>`;
-    h+=`<div class="m"><div class="t">${img(m.hc)}<b>${esc(m.h)}</b></div>${mid}<div class="t r"><b>${esc(m.a)}</b>${img(m.ac)}</div></div>`;
+    const mid=live||done?`<div class="c ${live?"live":""}">${m.hs??0} : ${m.as??0}<small>${live?T("live"):T("ft")}</small></div>`
+      :`<div class="c">${tm(m.utc)}${dt?`<small>${new Date(m.utc).toLocaleDateString("ru",{day:"2-digit",month:"2-digit"})}</small>`:""}</div>`;
+    h+=`<div class="m" data-mid="${m.id}"><div class="t" data-tid="${m.hid}">${img(m.hc)}<b>${esc(m.h)}</b></div>${mid}<div class="t r" data-tid="${m.aid}"><b>${esc(m.a)}</b>${img(m.ac)}</div></div>`;
   }
   return h;
 }
-function table(){
-  const t=D.tables[lg];if(!t)return `<div class="empty">Jadval hali tayyor emas</div>`;
-  return `<div class="row h"><span>#</span><span>Jamoa</span><span>O</span><span>+/-</span><span>Ochko</span></div>`+
-    t.map(r=>`<div class="row"><span>${r.pos}</span><div class="n">${img(r.c)}<span>${esc(r.n)}</span></div><span>${r.p}</span><span>${r.gd}</span><b>${r.pts}</b></div>`).join("");
+const dayMs=d=>{const key=new Date(Date.now()+d*864e5).toLocaleDateString("sv");
+  return D.matches.filter(m=>new Date(m.utc).toLocaleDateString("sv")===key).sort((a,b)=>a.utc<b.utc?-1:1);};
+function matches(){
+  const ms=dayMs(day);if(ms.length)return cards(ms,false);
+  const up=D.matches.filter(m=>new Date(m.utc)>new Date()&&m.st!=="FINISHED").sort((a,b)=>a.utc<b.utc?-1:1).slice(0,10);
+  return up.length?`<div class="empty">${T("none")}. ${T("soon")}:</div>`+cards(up,true):`<div class="empty">${T("none")}</div>`;
 }
-function render(){chips();$("#out").innerHTML=tab==="m"?matches():table();}
+function newsHtml(n){return (D.news||[]).slice(0,n).map(x=>`<a class="news" href="${esc(x.link)}" target="_blank" rel="noopener">${esc(x.title)}<small>${esc(x.date||"")}</small></a>`).join("");}
+function home(){
+  const live=D.matches.filter(m=>m.st==="IN_PLAY"||m.st==="PAUSED");
+  const td=dayMs(0);
+  let h=live.length?`<h3>🔴 ${T("live")}</h3>`+cards(live,false):"";
+  h+=`<h3>${T("t")}</h3>`+(td.length?cards(td,false):`<div class="empty">${T("none")}</div>`);
+  return h+`<h3>📰 ${T("news")}</h3>`+newsHtml(8);
+}
+function tableRows(rows,hl){
+  return `<div class="row h"><span>#</span><span>${T("tm")}</span><span>O</span><span>+/-</span><span>${T("pt")}</span></div>`+
+   rows.map(r=>`<div class="row" ${r.id===hl?'style="color:var(--ac)"':""} data-tid="${r.id}"><span>${r.pos}</span><div class="n">${img(r.c)}<span>${esc(r.n)}</span></div><span>${r.p}</span><span>${r.gd}</span><b>${r.pts}</b></div>`).join("");
+}
+function comps(){const t=D.tables[lg];return t?tableRows(t):`<div class="empty">${T("nt")}</div>`;}
+function render(){
+  if(!L)return pickLang();
+  $("nav").style.display="flex";
+  document.querySelectorAll("nav button").forEach(b=>{b.textContent=T(b.dataset.t);b.classList.toggle("on",b.dataset.t===tab);});
+  chips();$("#out").innerHTML=tab==="h"?home():tab==="m"?matches():comps();
+}
+function openMatch(id){
+  const m=D.matches.find(x=>x.id==id);if(!m)return;
+  const d=(D.detail||{})[id],live=m.st==="IN_PLAY"||m.st==="PAUSED",done=m.st==="FINISHED";
+  const side=t=>t===m.hid?m.h:m.a;
+  let h=`<div class="top"><b>${esc(m.comp)}</b><button data-close>${T("x")}</button></div>
+  <div class="big"><div data-tid="${m.hid}">${img(m.hc)}<b>${esc(m.h)}</b></div>
+  <div class="s ${live?"c live":""}">${live||done?`${m.hs??0} : ${m.as??0}`:tm(m.utc)}<small style="display:block;font-size:12px;color:var(--mu)">${live?T("live"):done?T("ft"):""}</small></div>
+  <div data-tid="${m.aid}">${img(m.ac)}<b>${esc(m.a)}</b></div></div>`;
+  if(d&&d.g&&d.g.length)h+=`<h3>⚽ ${T("goals")}</h3>`+d.g.map(g=>`<div class="ev"><i>${g.min}'</i><span>${esc(g.n)}${g.t==="OWN"?" ("+T("og")+")":g.t==="PENALTY"?" ("+T("pen")+")":""} — ${esc(side(g.tid))}</span></div>`).join("");
+  if(d&&d.c&&d.c.length)h+=`<h3>🟨 ${T("cards")}</h3>`+d.c.map(c=>`<div class="ev"><i>${c.min}'</i><span>${c.k==="RED"||c.k==="YELLOW_RED"?"🟥":"🟨"} ${esc(c.n)} — ${esc(side(c.tid))}</span></div>`).join("");
+  if(!d||(!(d.g||[]).length&&!(d.c||[]).length))h+=`<div class="empty">${T("nodet")}</div>`;
+  ov(h);
+}
+function openTeam(id){
+  id=+id;let name="",crest="";
+  const ms=D.matches.filter(m=>m.hid===id||m.aid===id).sort((a,b)=>a.utc<b.utc?-1:1);
+  ms.forEach(m=>{if(m.hid===id){name=m.h;crest=m.hc}else{name=m.a;crest=m.ac}});
+  let h=`<div class="top"><b>${esc(name)}</b><button data-close>${T("x")}</button></div><div class="big" style="grid-template-columns:1fr"><div>${img(crest).replace('22px','44px')}</div></div>`;
+  for(const [code,rows] of Object.entries(D.tables||{})){
+    const i=rows.findIndex(r=>r.id===id);
+    if(i>=0&&code!=="CL"){h+=`<h3>${LG[code]}</h3>`+tableRows(rows.slice(Math.max(0,i-2),i+3),id);break;}
+  }
+  h+=`<h3>${T("fix")}</h3>`+(ms.length?cards(ms,true):`<div class="empty">${T("none")}</div>`);
+  ov(h);
+}
+function ov(h){const o=$("#ov");o.innerHTML=h;o.classList.add("on");o.scrollTop=0;}
+document.body.onclick=e=>{
+  const t=e.target;
+  if(t.closest("[data-close]")){$("#ov").classList.remove("on");return;}
+  const l=t.closest("[data-l]");if(l){L=l.dataset.l;st("lang",L);render();return;}
+  if(t.closest("#lb")){L=null;render();return;}
+  const ch=t.closest(".chip");if(ch){tab==="m"?day=+ch.dataset.k:lg=ch.dataset.k;render();return;}
+  const nb=t.closest("nav button");if(nb){tab=nb.dataset.t;$("#ov").classList.remove("on");render();return;}
+  const te=t.closest("[data-tid]");if(te&&te.dataset.tid!=="null"){openTeam(te.dataset.tid);return;}
+  const mt=t.closest("[data-mid]");if(mt)openMatch(mt.dataset.mid);
+};
 async function load(){
-  try{const r=await fetch(RAW+"?t="+Math.floor(Date.now()/60000));D=await r.json();}catch(e){$("#out").innerHTML=`<div class="empty">Ma'lumot yuklanmadi. Qayta urinib ko'ring.</div>`;return;}
-  render();
+  try{const r=await fetch(RAW+"?t="+Math.floor(Date.now()/60000));D=await r.json();}
+  catch(e){if(L)$("#out").innerHTML=`<div class="empty">${T("err")}</div>`;return;}
+  if(!$("#ov").classList.contains("on")&&L)render();
 }
-$("#chips").onclick=e=>{const k=e.target.dataset.k;if(k===undefined)return;tab==="m"?day=+k:lg=k;render();};
-document.querySelector("nav").onclick=e=>{const t=e.target.dataset.t;if(!t)return;tab=t;document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on",b.dataset.t===t));render();};
-load();setInterval(load,60000);
-</script>
-</body>
-</html>
+L=st("lang");
+if(!L){const c=((tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user||{}).language_code||"").slice(0,2);L=null;}
+render();load();setInterval(load,60000);
+</script></body></html>
