@@ -117,7 +117,7 @@ img.th{width:78px;height:78px;border-radius:12px;object-fit:cover}
 <script>
 const BOT="onsportsuz_bot";
 const RAW="https://raw.githubusercontent.com/jasurumirov0622-ux/futbolchi-app/main/data.json";
-const LG={PL:"Premier League",PD:"La Liga",SA:"Serie A",BL1:"Bundesliga",FL1:"Ligue 1",CL:"Champions League"};
+const LG={PL:"Premier League",PD:"La Liga",SA:"Serie A",BL1:"Bundesliga",FL1:"Ligue 1",CL:"Champions League",UZL:"O'zbekiston Superligasi",UNL:"UEFA Nations League"};
 const I={
 uz:{anyc:"Boshqa jamoani qidirish",all:"Hammasi",ld:"YETAKCHI",yc:"SIZNING KLUBINGIZ",ov:"Sharh",tb:"Jadval",h2:"O'zaro",lgs:"Ligalar",nc:"Bu davlat klublari topilmadi",ct:"Sevimli davlatingizni tanlang",cl:"Sevimli klubingizni tanlang",sub:"🔔 Xabarnomani yoqish",skip:"O'tkazib yuborish",subh:"Jamoangiz o'ynaydigan kuni sizga xabar yuboramiz. Tugmani bosib botda tasdiqlang.",nx:"Kelgusi 5 ta o'yin",lt:"Oxirgi 5 ta o'yin",w:"Yangiliklar",nn:"Hozircha yangilik yo'q",h:"Bosh sahifa",m:"O'yinlar",c:"Musobaqalar",y:"Kecha",t:"Bugun",n:"Ertaga",news:"Futbol yangiliklari",live:"JONLI",ft:"Tugadi",none:"Bu kunda o'yinlar yo'q",soon:"Eng yaqin o'yinlar",load:"Yuklanmoqda…",err:"Ma'lumot yuklanmadi",x:"Yopish",goals:"Gollar",cards:"Kartochkalar",nodet:"Tafsilotlar hali yo'q",fix:"Jamoa o'yinlari",pick:"Tilni tanlang",nt:"Jadval hali tayyor emas",tm:"Jamoa",pt:"Ochko",og:"Avtogol",pen:"Penalti"},
 ru:{anyc:"Найти другую команду",all:"Все",ld:"ЛИДЕР",yc:"ВАШ КЛУБ",ov:"Обзор",tb:"Таблица",h2:"Личные встречи",lgs:"Лиги",nc:"Клубы этой страны не найдены",ct:"Выберите любимую страну",cl:"Выберите любимый клуб",sub:"🔔 Включить уведомления",skip:"Пропустить",subh:"В день матча мы пришлём вам уведомление. Нажмите кнопку и подтвердите в боте.",nx:"Следующие 5 матчей",lt:"Последние 5 матчей",w:"Новости",nn:"Пока новостей нет",h:"Главная",m:"Матчи",c:"Турниры",y:"Вчера",t:"Сегодня",n:"Завтра",news:"Футбольные новости",live:"LIVE",ft:"Завершён",none:"В этот день матчей нет",soon:"Ближайшие матчи",load:"Загрузка…",err:"Не удалось загрузить данные",x:"Закрыть",goals:"Голы",cards:"Карточки",nodet:"Подробностей пока нет",fix:"Матчи команды",pick:"Выберите язык",nt:"Таблица пока не готова",tm:"Команда",pt:"Очки",og:"Автогол",pen:"Пенальти"},
@@ -203,7 +203,7 @@ h:'<svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1
 w:'<svg viewBox="0 0 24 24"><path d="M4 5h13v14H6a2 2 0 0 1-2-2zM17 9h3v8a2 2 0 0 1-2 2M7 9h7M7 13h7"/></svg>',
 m:'<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>',
 c:'<svg viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H4v2a3 3 0 0 0 4 3M16 6h4v2a3 3 0 0 1-4 3M12 13v4M8 21h8M10 17h4"/></svg>'};
-const LGS={PL:["gb","#4a1f7a,#1b1033"],PD:["es","#8a1a1a,#2a0c0c"],SA:["it","#0f4c9a,#0a1a3a"],BL1:["de","#a01818,#2a1010"],FL1:["fr","#0f3f7a,#0a1a30"],CL:["eu","#123a8a,#0a1230"]};
+const LGS={PL:["gb","#4a1f7a,#1b1033"],PD:["es","#8a1a1a,#2a0c0c"],SA:["it","#0f4c9a,#0a1a3a"],BL1:["de","#a01818,#2a1010"],FL1:["fr","#0f3f7a,#0a1a30"],CL:["eu","#123a8a,#0a1230"],UZL:["uz","#0b6b8a,#062a38"],UNL:["eu","#0b5a3a,#07201a"]};
 function eta(u){const ms=new Date(u)-Date.now();if(ms<=0)return"";const d=Math.floor(ms/864e5),h=Math.floor(ms/36e5),mi=Math.max(1,Math.floor(ms/6e4));
   const [n,k]=d>=1?[d,"d"]:h>=1?[h,"h"]:[mi,"m"];
   return L==="uz"?`${n} ${{d:"kun",h:"soat",m:"daqiqa"}[k]}dan so'ng`:L==="ru"?`через ${n} ${{d:"дн.",h:"ч.",m:"мин."}[k]}`:`in ${n}${k}`;}
@@ -275,7 +275,7 @@ function tableRows(rows,hl){
 }
 function comps(){
   if(lgOpen){const t=D.tables[lg];
-    return `<div class="mh"><button class="ib" data-lgback>←</button><div class="ml">${LG[lg]}</div><span class="ib" style="visibility:hidden"></span></div>`+(t?`<div class="card">${tableRows(t)}</div>`:`<div class="empty">${T("nt")}</div>`);}
+    return `<div class="mh"><button class="ib" data-lgback>←</button><div class="ml">${LG[lg]}</div><span class="ib" style="visibility:hidden"></span></div>`+(t?`<div class="card">${tableRows(t)}</div>`:(x=>x.length?cards(x,true):`<div class="empty">${T("nt")}</div>`)(D.matches.filter(m=>m.comp===LG[lg]).sort((a,b)=>a.utc<b.utc?-1:1)));}
   return `<h2 class="pt">${T("lgs")}</h2>`+Object.keys(LG).map(k=>{
     const [f,g]=LGS[k],t=D.tables[k],r=t&&t[0];
     return `<div class="lc2" data-lg="${k}" style="background:linear-gradient(135deg,${g})"><img class="fl" src="https://flagcdn.com/w40/${f}.png" alt=""><h3>${LG[k]}</h3>`+(r?`<div class="ld"><small>${T("ld")}</small>${img(r.c)}<span>${esc(r.n)}</span><small>${r.pts} ${T("pt")}</small></div>`:"")+`</div>`;}).join("");
@@ -307,6 +307,7 @@ function openMatch(id,tb){
   }else if(mtab==="t"){
     const k=Object.keys(D.tables||{}).sort(a=>a==="CL"?1:-1).find(k=>{const t=D.tables[k];return t.some(r=>r.id===m.hid)&&t.some(r=>r.id===m.aid);});
     h+=k?`<div class="card">${tableRows(D.tables[k].filter(r=>r.id===m.hid||r.id===m.aid))}</div>`:none;
+  }else if(!m.hid||!m.aid){h+=none;
   }else{
     const all={};[...Object.values(D.tm||{}),...D.matches].forEach(x=>{if(x.st==="FINISHED"&&x.id!==m.id&&[x.hid,x.aid].includes(m.hid)&&[x.hid,x.aid].includes(m.aid))all[x.id]=x;});
     const l=Object.values(all).sort((a,b)=>a.utc<b.utc?1:-1);
@@ -334,7 +335,7 @@ document.body.onclick=e=>{
   const t=e.target;
   if(t.closest("[data-close]")){$("#ov").classList.remove("on");return;}
   const l=t.closest("[data-l]");if(l){L=l.dataset.l;st("lang",L);render();load();return;}
-  if(t.closest("#lb")){L=null;fav=null;st("fav","");st("skip","");ob.s="c";render();return;}
+  if(t.closest("#lb")){$("#ov").classList.remove("on");pickLang();return;}
   const oc=t.closest("[data-c]");if(oc){ob.code=oc.dataset.c;ob.s="k";loadClubs(ob.code);render();return;}
   const ok=t.closest("[data-club]");if(ok){fav={c:ob.code,id:ok.dataset.club,n:ok.dataset.n};st("fav",JSON.stringify(fav));ob.s="s";render();return;}
   if(t.closest("[data-back]")){ob.s="c";render();return;}
@@ -356,7 +357,7 @@ async function load(){
 }
 L=st("lang");
 try{fav=JSON.parse(st("fav")||"null");}catch(e){}
-ob.s=fav?"done":"c";
+ob.s=(fav||st("skip")==="1")?"done":"c";
 if(!L){const c=((tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user||{}).language_code||"").slice(0,2);L=null;}
 render();load();setInterval(load,60000);
 </script></body></html>
