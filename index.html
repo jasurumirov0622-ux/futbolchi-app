@@ -30,6 +30,23 @@ img{width:22px;height:22px;object-fit:contain;flex:none}
 .empty{text-align:center;color:var(--mu);padding:40px 16px}
 .news{display:block;margin:6px 16px;padding:12px;background:var(--card);border-radius:14px;color:var(--tx);text-decoration:none}
 .news small{display:block;color:var(--mu);margin-top:4px;font-size:12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:8px 16px}
+.grid button{display:flex;align-items:center;gap:8px;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--tx);font:600 14px system-ui;text-align:left}
+.skip{display:block;margin:16px auto;background:none;border:0;color:var(--mu);font:600 14px system-ui}
+.paper{margin:8px 16px;font-family:Georgia,'Times New Roman',serif}
+.mast{text-align:center;border-top:3px double var(--tx);border-bottom:1px solid var(--tx);padding:8px 0;margin-bottom:12px}
+.mast b{display:block;font-size:21px;letter-spacing:1px;font-weight:900}
+.mast small{color:var(--mu);font:12px Georgia,serif}
+.paper a{color:var(--tx);text-decoration:none;display:block}
+.paper img.ph{width:100%;height:auto;max-height:220px;object-fit:cover;border-radius:4px;margin-bottom:8px}
+.lead{padding-bottom:12px;border-bottom:1px solid var(--line)}
+.lead h2{margin:0 0 6px;font-size:22px;line-height:1.2}
+.paper p{margin:0;color:#c5cee0;font-size:14px;line-height:1.45}
+.paper small{color:var(--mu);font-size:12px}
+.cols{columns:2;column-gap:14px;column-rule:1px solid var(--line)}
+.art{break-inside:avoid;padding:12px 0;border-bottom:1px solid var(--line)}
+.art h4{margin:0 0 4px;font-size:15px;line-height:1.25}
+.art p{font-size:13px}
 nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:#0f1729;border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0)}
 nav button{flex:1;background:none;border:0;color:var(--mu);padding:14px 4px;font:600 13px system-ui}
 nav button.on{color:var(--ac)}
@@ -49,17 +66,20 @@ nav button.on{color:var(--ac)}
 <header><div><span>ONSPORTS</span>.UZ</div><button id="lb">🌐</button></header>
 <div id="chips" class="chips"></div>
 <main id="out"></main>
-<nav><button data-t="h"></button><button data-t="m"></button><button data-t="c"></button></nav>
+<nav><button data-t="h"></button><button data-t="w"></button><button data-t="m"></button><button data-t="c"></button></nav>
 <div id="ov"></div>
 <script>
+const BOT="onsportsuz_bot";
 const RAW="https://raw.githubusercontent.com/jasurumirov0622-ux/futbolchi-app/main/data.json";
 const LG={PL:"Premier League",PD:"La Liga",SA:"Serie A",BL1:"Bundesliga",FL1:"Ligue 1",CL:"Champions League"};
 const I={
-uz:{h:"Bosh sahifa",m:"O'yinlar",c:"Musobaqalar",y:"Kecha",t:"Bugun",n:"Ertaga",news:"Futbol yangiliklari",live:"JONLI",ft:"Tugadi",none:"Bu kunda o'yinlar yo'q",soon:"Eng yaqin o'yinlar",load:"Yuklanmoqda…",err:"Ma'lumot yuklanmadi",x:"Yopish",goals:"Gollar",cards:"Kartochkalar",nodet:"Tafsilotlar hali yo'q",fix:"Jamoa o'yinlari",pick:"Tilni tanlang",nt:"Jadval hali tayyor emas",tm:"Jamoa",pt:"Ochko",og:"Avtogol",pen:"Penalti"},
-ru:{h:"Главная",m:"Матчи",c:"Турниры",y:"Вчера",t:"Сегодня",n:"Завтра",news:"Футбольные новости",live:"LIVE",ft:"Завершён",none:"В этот день матчей нет",soon:"Ближайшие матчи",load:"Загрузка…",err:"Не удалось загрузить данные",x:"Закрыть",goals:"Голы",cards:"Карточки",nodet:"Подробностей пока нет",fix:"Матчи команды",pick:"Выберите язык",nt:"Таблица пока не готова",tm:"Команда",pt:"Очки",og:"Автогол",pen:"Пенальти"},
-en:{h:"Home",m:"Matches",c:"Competitions",y:"Yesterday",t:"Today",n:"Tomorrow",news:"Football news",live:"LIVE",ft:"FT",none:"No matches on this day",soon:"Upcoming matches",load:"Loading…",err:"Failed to load data",x:"Close",goals:"Goals",cards:"Cards",nodet:"No details yet",fix:"Team matches",pick:"Choose language",nt:"Table not ready yet",tm:"Team",pt:"Pts",og:"Own goal",pen:"Penalty"}};
+uz:{ct:"Sevimli davlatingizni tanlang",cl:"Sevimli klubingizni tanlang",sub:"🔔 Xabarnomani yoqish",skip:"O'tkazib yuborish",subh:"Jamoangiz o'ynaydigan kuni sizga xabar yuboramiz. Tugmani bosib botda tasdiqlang.",nx:"Kelgusi 5 ta o'yin",lt:"Oxirgi 5 ta o'yin",w:"Yangiliklar",nn:"Hozircha yangilik yo'q",h:"Bosh sahifa",m:"O'yinlar",c:"Musobaqalar",y:"Kecha",t:"Bugun",n:"Ertaga",news:"Futbol yangiliklari",live:"JONLI",ft:"Tugadi",none:"Bu kunda o'yinlar yo'q",soon:"Eng yaqin o'yinlar",load:"Yuklanmoqda…",err:"Ma'lumot yuklanmadi",x:"Yopish",goals:"Gollar",cards:"Kartochkalar",nodet:"Tafsilotlar hali yo'q",fix:"Jamoa o'yinlari",pick:"Tilni tanlang",nt:"Jadval hali tayyor emas",tm:"Jamoa",pt:"Ochko",og:"Avtogol",pen:"Penalti"},
+ru:{ct:"Выберите любимую страну",cl:"Выберите любимый клуб",sub:"🔔 Включить уведомления",skip:"Пропустить",subh:"В день матча мы пришлём вам уведомление. Нажмите кнопку и подтвердите в боте.",nx:"Следующие 5 матчей",lt:"Последние 5 матчей",w:"Новости",nn:"Пока новостей нет",h:"Главная",m:"Матчи",c:"Турниры",y:"Вчера",t:"Сегодня",n:"Завтра",news:"Футбольные новости",live:"LIVE",ft:"Завершён",none:"В этот день матчей нет",soon:"Ближайшие матчи",load:"Загрузка…",err:"Не удалось загрузить данные",x:"Закрыть",goals:"Голы",cards:"Карточки",nodet:"Подробностей пока нет",fix:"Матчи команды",pick:"Выберите язык",nt:"Таблица пока не готова",tm:"Команда",pt:"Очки",og:"Автогол",pen:"Пенальти"},
+en:{ct:"Choose your favourite country",cl:"Choose your favourite club",sub:"🔔 Turn on notifications",skip:"Skip",subh:"We'll message you on match day. Tap the button and confirm in the bot.",nx:"Next 5 matches",lt:"Last 5 matches",w:"News",nn:"No news yet",h:"Home",m:"Matches",c:"Competitions",y:"Yesterday",t:"Today",n:"Tomorrow",news:"Football news",live:"LIVE",ft:"FT",none:"No matches on this day",soon:"Upcoming matches",load:"Loading…",err:"Failed to load data",x:"Close",goals:"Goals",cards:"Cards",nodet:"No details yet",fix:"Team matches",pick:"Choose language",nt:"Table not ready yet",tm:"Team",pt:"Pts",og:"Own goal",pen:"Penalty"}};
+const CN={uz:{PL:"Angliya",PD:"Ispaniya",SA:"Italiya",BL1:"Germaniya",FL1:"Fransiya"},ru:{PL:"Англия",PD:"Испания",SA:"Италия",BL1:"Германия",FL1:"Франция"},en:{PL:"England",PD:"Spain",SA:"Italy",BL1:"Germany",FL1:"France"}};
+const FL={PL:"🇬🇧",PD:"🇪🇸",SA:"🇮🇹",BL1:"🇩🇪",FL1:"🇫🇷"};
 const NAMES={uz:"🇺🇿 O'zbekcha",ru:"🇷🇺 Русский",en:"🇬🇧 English"};
-let D={matches:[],tables:{},news:[],detail:{}},tab="h",day=0,lg="PD",L=null;
+let D={matches:[],tables:{},news:[],detail:{}},tab="h",day=0,lg="PD",L=null,fav=null,ob={s:"c",code:null};
 const $=s=>document.querySelector(s);
 const tg=window.Telegram&&Telegram.WebApp;if(tg){tg.ready();tg.expand();}
 const st=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){}};
@@ -72,6 +92,14 @@ function pickLang(){
   $("#chips").innerHTML="";$("nav").style.display="none";
   $("#out").innerHTML=`<div class="pick"><h3 style="margin:0;font-size:18px;color:var(--tx)">🌐 Til · Язык · Language</h3>`+
     Object.keys(NAMES).map(k=>`<button data-l="${k}">${NAMES[k]}</button>`).join("")+`</div>`;
+}
+function onboard(){
+  $("#chips").innerHTML="";$("nav").style.display="none";let h;
+  if(ob.s==="c")h=`<h3 style="font-size:18px;color:var(--tx)">${T("ct")}</h3><div class="grid">`+Object.keys(FL).map(k=>`<button data-c="${k}">${FL[k]} ${CN[L][k]}</button>`).join("")+`</div><button class="skip" data-skip>${T("skip")}</button>`;
+  else if(ob.s==="k"){const t=D.tables[ob.code];
+    h=`<h3 style="font-size:18px;color:var(--tx)">${T("cl")}</h3>`+(t?`<div class="grid">`+[...t].sort((a,b)=>a.n.localeCompare(b.n)).map(r=>`<button data-club="${r.id}" data-n="${esc(r.n)}">${img(r.c)}<span>${esc(r.n)}</span></button>`).join("")+`</div>`:`<div class="empty">${T("load")}</div>`)+`<button class="skip" data-back>←</button>`;}
+  else h=`<div class="pick"><div style="font-size:20px;font-weight:800">⭐ ${esc(fav.n)}</div><p style="color:var(--mu);text-align:center;max-width:290px;margin:0">${T("subh")}</p><button data-sub>${T("sub")}</button><button class="skip" data-skip>${T("skip")}</button></div>`;
+  $("#out").innerHTML=h;
 }
 function chips(){
   let list,cur;
@@ -98,13 +126,22 @@ function matches(){
   const up=D.matches.filter(m=>new Date(m.utc)>new Date()&&m.st!=="FINISHED").sort((a,b)=>a.utc<b.utc?-1:1).slice(0,10);
   return up.length?`<div class="empty">${T("none")}. ${T("soon")}:</div>`+cards(up,true):`<div class="empty">${T("none")}</div>`;
 }
-function newsHtml(n){return (D.news||[]).slice(0,n).map(x=>`<a class="news" href="${esc(x.link)}" target="_blank" rel="noopener">${esc(x.title)}<small>${esc(x.date||"")}</small></a>`).join("");}
+function newsHtml(n){
+  const a=(D.news||[]).slice(0,n);
+  if(!a.length)return `<div class="empty">${T("nn")}</div>`;
+  const dt=x=>x.date?new Date(x.date).toLocaleDateString("ru"):"";
+  const f=a[0];
+  const lead=`<a class="lead" href="${esc(f.link)}" target="_blank" rel="noopener">${f.img?`<img class="ph" src="${esc(f.img)}" alt="" loading="lazy">`:""}<h2>${esc(f.title)}</h2><p>${esc(f.text)}</p><small>${dt(f)}</small></a>`;
+  const rest=a.slice(1).map(x=>`<a class="art" href="${esc(x.link)}" target="_blank" rel="noopener">${x.img?`<img class="ph" src="${esc(x.img)}" alt="" loading="lazy">`:""}<h4>${esc(x.title)}</h4><p>${esc(x.text.slice(0,110))}</p><small>${dt(x)}</small></a>`).join("");
+  return `<div class="paper"><div class="mast"><b>ONSPORTS.UZ GAZETA</b><small>${new Date().toLocaleDateString("ru",{day:"numeric",month:"long",year:"numeric"})}</small></div>${lead}<div class="cols">${rest}</div></div>`;
+}
 function home(){
   const live=D.matches.filter(m=>m.st==="IN_PLAY"||m.st==="PAUSED");
   const td=dayMs(0);
   let h=live.length?`<h3>🔴 ${T("live")}</h3>`+cards(live,false):"";
-  h+=`<h3>${T("t")}</h3>`+(td.length?cards(td,false):`<div class="empty">${T("none")}</div>`);
-  return h+`<h3>📰 ${T("news")}</h3>`+newsHtml(8);
+  const up=D.matches.filter(m=>new Date(m.utc)>new Date()&&m.st!=="FINISHED").sort((a,b)=>a.utc<b.utc?-1:1).slice(0,8);
+  h+=`<h3>${T("t")}</h3>`+(td.length?cards(td,false):`<div class="empty">${T("none")}</div>`+(up.length?`<h3>${T("soon")}</h3>`+cards(up,true):""));
+  return h+`<h3>📰 ${T("news")}</h3>`+newsHtml(5);
 }
 function tableRows(rows,hl){
   return `<div class="row h"><span>#</span><span>${T("tm")}</span><span>O</span><span>+/-</span><span>${T("pt")}</span></div>`+
@@ -113,9 +150,10 @@ function tableRows(rows,hl){
 function comps(){const t=D.tables[lg];return t?tableRows(t):`<div class="empty">${T("nt")}</div>`;}
 function render(){
   if(!L)return pickLang();
+  if(ob.s!=="done")return onboard();
   $("nav").style.display="flex";
   document.querySelectorAll("nav button").forEach(b=>{b.textContent=T(b.dataset.t);b.classList.toggle("on",b.dataset.t===tab);});
-  chips();$("#out").innerHTML=tab==="h"?home():tab==="m"?matches():comps();
+  chips();$("#out").innerHTML=tab==="h"?home():tab==="w"?newsHtml(30):tab==="m"?matches():comps();
 }
 function openMatch(id){
   const m=D.matches.find(x=>x.id==id);if(!m)return;
@@ -131,15 +169,18 @@ function openMatch(id){
   ov(h);
 }
 function openTeam(id){
-  id=+id;let name="",crest="";
-  const ms=D.matches.filter(m=>m.hid===id||m.aid===id).sort((a,b)=>a.utc<b.utc?-1:1);
-  ms.forEach(m=>{if(m.hid===id){name=m.h;crest=m.hc}else{name=m.a;crest=m.ac}});
-  let h=`<div class="top"><b>${esc(name)}</b><button data-close>${T("x")}</button></div><div class="big" style="grid-template-columns:1fr"><div>${img(crest).replace('22px','44px')}</div></div>`;
-  for(const [code,rows] of Object.entries(D.tables||{})){
-    const i=rows.findIndex(r=>r.id===id);
-    if(i>=0&&code!=="CL"){h+=`<h3>${LG[code]}</h3>`+tableRows(rows.slice(Math.max(0,i-2),i+3),id);break;}
-  }
-  h+=`<h3>${T("fix")}</h3>`+(ms.length?cards(ms,true):`<div class="empty">${T("none")}</div>`);
+  id=+id;
+  const M=x=>Object.assign({},(D.tm||{})[x],D.matches.find(y=>y.id==x)||{});
+  const tt=(D.tt||{})[id];let nx,lt;
+  if(tt){nx=tt.n.map(M);lt=tt.l.map(M);}
+  else{const a=D.matches.filter(m=>m.hid===id||m.aid===id).sort((p,q)=>p.utc<q.utc?-1:1);
+    nx=a.filter(m=>m.st!=="FINISHED").slice(0,5);lt=a.filter(m=>m.st==="FINISHED").reverse().slice(0,5);}
+  let name="",crest="";
+  nx.concat(lt).forEach(m=>{if(m.hid===id){name=m.h;crest=m.hc}else if(m.aid===id){name=m.a;crest=m.ac}});
+  let h=`<div class="top"><b>${esc(name)}</b><button data-close>${T("x")}</button></div>
+  <div class="big" style="grid-template-columns:1fr">${crest?`<div><img src="${esc(crest)}" style="width:64px;height:64px;margin:0 auto 8px;display:block" alt=""><b style="font-size:20px">${esc(name)}</b></div>`:""}</div>`;
+  h+=`<h3>${T("nx")}</h3>`+(nx.length?cards(nx,true):`<div class="empty">${T("none")}</div>`);
+  h+=`<h3>${T("lt")}</h3>`+(lt.length?cards(lt,true):`<div class="empty">${T("none")}</div>`);
   ov(h);
 }
 function ov(h){const o=$("#ov");o.innerHTML=h;o.classList.add("on");o.scrollTop=0;}
@@ -147,7 +188,12 @@ document.body.onclick=e=>{
   const t=e.target;
   if(t.closest("[data-close]")){$("#ov").classList.remove("on");return;}
   const l=t.closest("[data-l]");if(l){L=l.dataset.l;st("lang",L);render();return;}
-  if(t.closest("#lb")){L=null;render();return;}
+  if(t.closest("#lb")){L=null;fav=null;st("fav","");st("skip","");ob.s="c";render();return;}
+  const oc=t.closest("[data-c]");if(oc){ob.code=oc.dataset.c;ob.s="k";render();return;}
+  const ok=t.closest("[data-club]");if(ok){fav={c:ob.code,id:+ok.dataset.club,n:ok.dataset.n};st("fav",JSON.stringify(fav));ob.s="s";render();return;}
+  if(t.closest("[data-back]")){ob.s="c";render();return;}
+  if(t.closest("[data-skip]")){ob.s="done";st("skip","1");render();return;}
+  if(t.closest("[data-sub]")){ob.s="done";render();const lk=`https://t.me/${BOT}?start=fav_${L}_${fav.id}`;tg?tg.openTelegramLink(lk):window.open(lk,"_blank");return;}
   const ch=t.closest(".chip");if(ch){tab==="m"?day=+ch.dataset.k:lg=ch.dataset.k;render();return;}
   const nb=t.closest("nav button");if(nb){tab=nb.dataset.t;$("#ov").classList.remove("on");render();return;}
   const te=t.closest("[data-tid]");if(te&&te.dataset.tid!=="null"){openTeam(te.dataset.tid);return;}
@@ -159,6 +205,8 @@ async function load(){
   if(!$("#ov").classList.contains("on")&&L)render();
 }
 L=st("lang");
+try{fav=JSON.parse(st("fav")||"null");}catch(e){}
+ob.s=(fav||st("skip"))?"done":"c";
 if(!L){const c=((tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user||{}).language_code||"").slice(0,2);L=null;}
 render();load();setInterval(load,60000);
 </script></body></html>
