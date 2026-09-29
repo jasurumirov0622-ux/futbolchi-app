@@ -32,6 +32,8 @@ img{width:22px;height:22px;object-fit:contain;flex:none}
 .news small{display:block;color:var(--mu);margin-top:4px;font-size:12px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:8px 16px}
 .grid button{display:flex;align-items:center;gap:8px;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--tx);font:600 14px system-ui;text-align:left}
+.q{display:block;width:calc(100% - 32px);margin:8px 16px;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--tx);font:15px system-ui}
+.grid button img{width:26px;height:auto}
 .skip{display:block;margin:16px auto;background:none;border:0;color:var(--mu);font:600 14px system-ui}
 .paper{margin:8px 16px;font-family:Georgia,'Times New Roman',serif}
 .mast{text-align:center;border-top:3px double var(--tx);border-bottom:1px solid var(--tx);padding:8px 0;margin-bottom:12px}
@@ -73,13 +75,17 @@ const BOT="onsportsuz_bot";
 const RAW="https://raw.githubusercontent.com/jasurumirov0622-ux/futbolchi-app/main/data.json";
 const LG={PL:"Premier League",PD:"La Liga",SA:"Serie A",BL1:"Bundesliga",FL1:"Ligue 1",CL:"Champions League"};
 const I={
-uz:{ct:"Sevimli davlatingizni tanlang",cl:"Sevimli klubingizni tanlang",sub:"🔔 Xabarnomani yoqish",skip:"O'tkazib yuborish",subh:"Jamoangiz o'ynaydigan kuni sizga xabar yuboramiz. Tugmani bosib botda tasdiqlang.",nx:"Kelgusi 5 ta o'yin",lt:"Oxirgi 5 ta o'yin",w:"Yangiliklar",nn:"Hozircha yangilik yo'q",h:"Bosh sahifa",m:"O'yinlar",c:"Musobaqalar",y:"Kecha",t:"Bugun",n:"Ertaga",news:"Futbol yangiliklari",live:"JONLI",ft:"Tugadi",none:"Bu kunda o'yinlar yo'q",soon:"Eng yaqin o'yinlar",load:"Yuklanmoqda…",err:"Ma'lumot yuklanmadi",x:"Yopish",goals:"Gollar",cards:"Kartochkalar",nodet:"Tafsilotlar hali yo'q",fix:"Jamoa o'yinlari",pick:"Tilni tanlang",nt:"Jadval hali tayyor emas",tm:"Jamoa",pt:"Ochko",og:"Avtogol",pen:"Penalti"},
-ru:{ct:"Выберите любимую страну",cl:"Выберите любимый клуб",sub:"🔔 Включить уведомления",skip:"Пропустить",subh:"В день матча мы пришлём вам уведомление. Нажмите кнопку и подтвердите в боте.",nx:"Следующие 5 матчей",lt:"Последние 5 матчей",w:"Новости",nn:"Пока новостей нет",h:"Главная",m:"Матчи",c:"Турниры",y:"Вчера",t:"Сегодня",n:"Завтра",news:"Футбольные новости",live:"LIVE",ft:"Завершён",none:"В этот день матчей нет",soon:"Ближайшие матчи",load:"Загрузка…",err:"Не удалось загрузить данные",x:"Закрыть",goals:"Голы",cards:"Карточки",nodet:"Подробностей пока нет",fix:"Матчи команды",pick:"Выберите язык",nt:"Таблица пока не готова",tm:"Команда",pt:"Очки",og:"Автогол",pen:"Пенальти"},
-en:{ct:"Choose your favourite country",cl:"Choose your favourite club",sub:"🔔 Turn on notifications",skip:"Skip",subh:"We'll message you on match day. Tap the button and confirm in the bot.",nx:"Next 5 matches",lt:"Last 5 matches",w:"News",nn:"No news yet",h:"Home",m:"Matches",c:"Competitions",y:"Yesterday",t:"Today",n:"Tomorrow",news:"Football news",live:"LIVE",ft:"FT",none:"No matches on this day",soon:"Upcoming matches",load:"Loading…",err:"Failed to load data",x:"Close",goals:"Goals",cards:"Cards",nodet:"No details yet",fix:"Team matches",pick:"Choose language",nt:"Table not ready yet",tm:"Team",pt:"Pts",og:"Own goal",pen:"Penalty"}};
-const CN={uz:{PL:"Angliya",PD:"Ispaniya",SA:"Italiya",BL1:"Germaniya",FL1:"Fransiya"},ru:{PL:"Англия",PD:"Испания",SA:"Италия",BL1:"Германия",FL1:"Франция"},en:{PL:"England",PD:"Spain",SA:"Italy",BL1:"Germany",FL1:"France"}};
-const FL={PL:"🇬🇧",PD:"🇪🇸",SA:"🇮🇹",BL1:"🇩🇪",FL1:"🇫🇷"};
+uz:{nc:"Bu davlat klublari topilmadi",ct:"Sevimli davlatingizni tanlang",cl:"Sevimli klubingizni tanlang",sub:"🔔 Xabarnomani yoqish",skip:"O'tkazib yuborish",subh:"Jamoangiz o'ynaydigan kuni sizga xabar yuboramiz. Tugmani bosib botda tasdiqlang.",nx:"Kelgusi 5 ta o'yin",lt:"Oxirgi 5 ta o'yin",w:"Yangiliklar",nn:"Hozircha yangilik yo'q",h:"Bosh sahifa",m:"O'yinlar",c:"Musobaqalar",y:"Kecha",t:"Bugun",n:"Ertaga",news:"Futbol yangiliklari",live:"JONLI",ft:"Tugadi",none:"Bu kunda o'yinlar yo'q",soon:"Eng yaqin o'yinlar",load:"Yuklanmoqda…",err:"Ma'lumot yuklanmadi",x:"Yopish",goals:"Gollar",cards:"Kartochkalar",nodet:"Tafsilotlar hali yo'q",fix:"Jamoa o'yinlari",pick:"Tilni tanlang",nt:"Jadval hali tayyor emas",tm:"Jamoa",pt:"Ochko",og:"Avtogol",pen:"Penalti"},
+ru:{nc:"Клубы этой страны не найдены",ct:"Выберите любимую страну",cl:"Выберите любимый клуб",sub:"🔔 Включить уведомления",skip:"Пропустить",subh:"В день матча мы пришлём вам уведомление. Нажмите кнопку и подтвердите в боте.",nx:"Следующие 5 матчей",lt:"Последние 5 матчей",w:"Новости",nn:"Пока новостей нет",h:"Главная",m:"Матчи",c:"Турниры",y:"Вчера",t:"Сегодня",n:"Завтра",news:"Футбольные новости",live:"LIVE",ft:"Завершён",none:"В этот день матчей нет",soon:"Ближайшие матчи",load:"Загрузка…",err:"Не удалось загрузить данные",x:"Закрыть",goals:"Голы",cards:"Карточки",nodet:"Подробностей пока нет",fix:"Матчи команды",pick:"Выберите язык",nt:"Таблица пока не готова",tm:"Команда",pt:"Очки",og:"Автогол",pen:"Пенальти"},
+en:{nc:"No clubs found for this country",ct:"Choose your favourite country",cl:"Choose your favourite club",sub:"🔔 Turn on notifications",skip:"Skip",subh:"We'll message you on match day. Tap the button and confirm in the bot.",nx:"Next 5 matches",lt:"Last 5 matches",w:"News",nn:"No news yet",h:"Home",m:"Matches",c:"Competitions",y:"Yesterday",t:"Today",n:"Tomorrow",news:"Football news",live:"LIVE",ft:"FT",none:"No matches on this day",soon:"Upcoming matches",load:"Loading…",err:"Failed to load data",x:"Close",goals:"Goals",cards:"Cards",nodet:"No details yet",fix:"Team matches",pick:"Choose language",nt:"Table not ready yet",tm:"Team",pt:"Pts",og:"Own goal",pen:"Penalty"}};
+const CC="AF AL DZ AD AO AG AR AM AU AT AZ BS BH BD BB BY BE BZ BJ BT BO BA BW BR BN BG BF BI KH CM CA CV CF TD CL CN CO KM CG CD CR CI HR CU CY CZ DK DJ DM DO EC EG SV GQ ER EE SZ ET FJ FI FR GA GM GE DE GH GR GD GT GN GW GY HT HN HK HU IS IN ID IR IQ IE IL IT JM JP JO KZ KE KP KR XK KW KG LA LV LB LS LR LY LI LT LU MG MW MY MV ML MT MR MU MX MD MC MN ME MA MZ MM NA NP NL NZ NI NE NG MK NO OM PK PS PA PG PY PE PH PL PT QA RO RU RW KN LC VC WS SM ST SA SN RS SC SL SG SK SI SB SO ZA SS ES LK SD SR SE CH SY TW TJ TZ TH TL TG TO TT TN TR TM UG UA AE GB US UY UZ VU VE VN YE ZM ZW".split(" ");
+const FDC={GB:"PL",ES:"PD",IT:"SA",DE:"BL1",FR:"FL1"};
+const ENO={TR:"Turkey",CZ:"Czech Republic",CI:"Ivory Coast"};
+const dn=l=>{try{return new Intl.DisplayNames([l],{type:"region"})}catch(e){return new Intl.DisplayNames(["en"],{type:"region"})}};
+const flag=c=>`<img src="https://flagcdn.com/w40/${c.toLowerCase()}.png" alt="">`;
+function fq(v){v=v.toLowerCase();document.querySelectorAll("#cg button").forEach(b=>b.style.display=b.dataset.nm.toLowerCase().includes(v)?"":"none");}
 const NAMES={uz:"🇺🇿 O'zbekcha",ru:"🇷🇺 Русский",en:"🇬🇧 English"};
-let D={matches:[],tables:{},news:[],detail:{}},tab="h",day=0,lg="PD",L=null,fav=null,ob={s:"c",code:null};
+let D={matches:[],tables:{},news:[],detail:{}},tab="h",day=0,lg="PD",L=null,fav=null,ob={s:"c",code:null,list:null};
 const $=s=>document.querySelector(s);
 const tg=window.Telegram&&Telegram.WebApp;if(tg){tg.ready();tg.expand();}
 const st=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){}};
@@ -93,11 +99,25 @@ function pickLang(){
   $("#out").innerHTML=`<div class="pick"><h3 style="margin:0;font-size:18px;color:var(--tx)">🌐 Til · Язык · Language</h3>`+
     Object.keys(NAMES).map(k=>`<button data-l="${k}">${NAMES[k]}</button>`).join("")+`</div>`;
 }
+async function loadClubs(code){
+  ob.list=null;if(FDC[code])return;
+  try{const en=ENO[code]||dn("en").of(code);
+    const r=await fetch(`https://www.thesportsdb.com/api/v1/json/3/search_all_teams.php?s=Soccer&c=${encodeURIComponent(en)}`);
+    const d=await r.json();
+    ob.list=(d.teams||[]).map(t=>({id:"db"+t.idTeam,n:t.strTeam,c:t.strBadge?t.strBadge+"/tiny":""}));
+  }catch(e){ob.list=[];}
+  if(ob.s==="k")onboard();
+}
+function clubList(){
+  if(FDC[ob.code]){const t=D.tables[FDC[ob.code]];return t?t.map(r=>({id:r.id,n:r.n,c:r.c})):null;}
+  return ob.list;
+}
 function onboard(){
   $("#chips").innerHTML="";$("nav").style.display="none";let h;
-  if(ob.s==="c")h=`<h3 style="font-size:18px;color:var(--tx)">${T("ct")}</h3><div class="grid">`+Object.keys(FL).map(k=>`<button data-c="${k}">${FL[k]} ${CN[L][k]}</button>`).join("")+`</div><button class="skip" data-skip>${T("skip")}</button>`;
-  else if(ob.s==="k"){const t=D.tables[ob.code];
-    h=`<h3 style="font-size:18px;color:var(--tx)">${T("cl")}</h3>`+(t?`<div class="grid">`+[...t].sort((a,b)=>a.n.localeCompare(b.n)).map(r=>`<button data-club="${r.id}" data-n="${esc(r.n)}">${img(r.c)}<span>${esc(r.n)}</span></button>`).join("")+`</div>`:`<div class="empty">${T("load")}</div>`)+`<button class="skip" data-back>←</button>`;}
+  if(ob.s==="c"){const d=dn(L),nm=k=>d.of(k)||k;
+    h=`<h3 style="font-size:18px;color:var(--tx)">${T("ct")}</h3><input class="q" placeholder="🔍" oninput="fq(this.value)"><div class="grid" id="cg">`+[...CC].sort((a,b)=>nm(a).localeCompare(nm(b),L)).map(k=>`<button data-c="${k}" data-nm="${esc(nm(k))}">${flag(k)}<span>${esc(nm(k))}</span></button>`).join("")+`</div><button class="skip" data-skip>${T("skip")}</button>`;}
+  else if(ob.s==="k"){const l=clubList();
+    h=`<h3 style="font-size:18px;color:var(--tx)">${T("cl")}</h3>`+(l===null?`<div class="empty">${T("load")}</div>`:l.length?`<div class="grid">`+[...l].sort((a,b)=>a.n.localeCompare(b.n)).map(r=>`<button data-club="${r.id}" data-n="${esc(r.n)}">${img(r.c)}<span>${esc(r.n)}</span></button>`).join("")+`</div>`:`<div class="empty">${T("nc")}</div>`)+`<button class="skip" data-back>←</button>`;}
   else h=`<div class="pick"><div style="font-size:20px;font-weight:800">⭐ ${esc(fav.n)}</div><p style="color:var(--mu);text-align:center;max-width:290px;margin:0">${T("subh")}</p><button data-sub>${T("sub")}</button><button class="skip" data-skip>${T("skip")}</button></div>`;
   $("#out").innerHTML=h;
 }
@@ -189,8 +209,8 @@ document.body.onclick=e=>{
   if(t.closest("[data-close]")){$("#ov").classList.remove("on");return;}
   const l=t.closest("[data-l]");if(l){L=l.dataset.l;st("lang",L);render();return;}
   if(t.closest("#lb")){L=null;fav=null;st("fav","");st("skip","");ob.s="c";render();return;}
-  const oc=t.closest("[data-c]");if(oc){ob.code=oc.dataset.c;ob.s="k";render();return;}
-  const ok=t.closest("[data-club]");if(ok){fav={c:ob.code,id:+ok.dataset.club,n:ok.dataset.n};st("fav",JSON.stringify(fav));ob.s="s";render();return;}
+  const oc=t.closest("[data-c]");if(oc){ob.code=oc.dataset.c;ob.s="k";loadClubs(ob.code);render();return;}
+  const ok=t.closest("[data-club]");if(ok){fav={c:ob.code,id:ok.dataset.club,n:ok.dataset.n};st("fav",JSON.stringify(fav));ob.s="s";render();return;}
   if(t.closest("[data-back]")){ob.s="c";render();return;}
   if(t.closest("[data-skip]")){ob.s="done";st("skip","1");render();return;}
   if(t.closest("[data-sub]")){ob.s="done";render();const lk=`https://t.me/${BOT}?start=fav_${L}_${fav.id}`;tg?tg.openTelegramLink(lk):window.open(lk,"_blank");return;}
@@ -202,7 +222,7 @@ document.body.onclick=e=>{
 async function load(){
   try{const r=await fetch(RAW+"?t="+Math.floor(Date.now()/60000));D=await r.json();}
   catch(e){if(L)$("#out").innerHTML=`<div class="empty">${T("err")}</div>`;return;}
-  if(!$("#ov").classList.contains("on")&&L)render();
+  if(!$("#ov").classList.contains("on")&&L&&ob.s!=="c")render();
 }
 L=st("lang");
 try{fav=JSON.parse(st("fav")||"null");}catch(e){}
