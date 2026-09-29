@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ONSPORTS Futbol</title>
+<title>ONSPORTS.UZ</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
 :root{--bg:#0b1220;--card:#131c30;--line:#22304d;--tx:#eef2fa;--mu:#8a98b5;--ac:#2fd08a;--live:#ff5a5f}
@@ -35,7 +35,7 @@ nav button.on{color:var(--ac)}
 </style>
 </head>
 <body>
-<header>ONS<span>PORTS</span> futbol</header>
+<header><span>ONSPORTS</span>.UZ</header>
 <div id="chips" class="chips"></div>
 <main id="out"><div class="empty">Yuklanmoqda…</div></main>
 <nav><button data-t="m" class="on">O'yinlar</button><button data-t="t">Jadval</button></nav>
@@ -57,13 +57,20 @@ function chips(){
 function matches(){
   const key=new Date(Date.now()+day*864e5).toLocaleDateString("sv");
   const ms=D.matches.filter(m=>new Date(m.utc).toLocaleDateString("sv")===key).sort((a,b)=>a.utc<b.utc?-1:1);
-  if(!ms.length)return `<div class="empty">Bu kunda o'yinlar yo'q</div>`;
+  if(!ms.length){
+    const up=D.matches.filter(m=>new Date(m.utc)>new Date()&&m.st!=="FINISHED").sort((a,b)=>a.utc<b.utc?-1:1).slice(0,10);
+    if(!up.length)return `<div class="empty">Bu kunda o'yinlar yo'q</div>`;
+    return `<div class="empty">Bu kunda o'yinlar yo'q. Eng yaqin o'yinlar:</div>`+cards(up,true);
+  }
+  return cards(ms,false);
+}
+function cards(ms,dt){
   let comp="",h="";
   for(const m of ms){
     if(m.comp!==comp){comp=m.comp;h+=`<h3>${esc(comp)}</h3>`;}
     const live=m.st==="IN_PLAY"||m.st==="PAUSED",done=m.st==="FINISHED";
     const time=new Date(m.utc).toLocaleTimeString("ru",{hour:"2-digit",minute:"2-digit"});
-    const mid=live||done?`<div class="c ${live?"live":""}">${m.hs??0} : ${m.as??0}<small>${live?"JONLI":"Tugadi"}</small></div>`:`<div class="c">${time}</div>`;
+    const mid=live||done?`<div class="c ${live?"live":""}">${m.hs??0} : ${m.as??0}<small>${live?"JONLI":"Tugadi"}</small></div>`:`<div class="c">${time}${dt?`<small>${new Date(m.utc).toLocaleDateString("ru",{day:"2-digit",month:"2-digit"})}</small>`:""}</div>`;
     h+=`<div class="m"><div class="t">${img(m.hc)}<b>${esc(m.h)}</b></div>${mid}<div class="t r"><b>${esc(m.a)}</b>${img(m.ac)}</div></div>`;
   }
   return h;
