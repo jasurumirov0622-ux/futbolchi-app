@@ -63,21 +63,64 @@ nav button.on{color:var(--ac)}
 .ev i{color:var(--mu);font-style:normal;width:34px;flex:none}
 .pick{display:grid;place-items:center;min-height:80vh;gap:14px;padding:16px;align-content:center}
 .pick button{width:240px;padding:14px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--tx);font:700 16px system-ui}
+body{padding-bottom:104px}
+nav{left:50%;right:auto;transform:translateX(-50%);bottom:calc(12px + env(safe-area-inset-bottom,0px));width:min(92%,380px);border:1px solid var(--line);border-radius:99px;background:rgba(19,28,48,.94);backdrop-filter:blur(10px);padding:6px;gap:4px}
+nav button{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px;border-radius:99px;font:600 10px system-ui}
+nav button.on{background:#22304d}
+nav svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.seg{justify-content:center}.seg .chip{flex:1;border-radius:12px;text-align:center}
+.lg{background:var(--card);border:1px solid var(--line);border-radius:18px;margin:10px 16px;overflow:hidden}
+.lgh{padding:12px 14px;font-size:14px}
+.lg .m{margin:0;border-radius:0;background:none;border-top:1px solid var(--line)}
+.chip i{font-style:normal;opacity:.7;margin-left:4px;font-size:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;margin:10px 16px;overflow:hidden;padding:4px 0}
+.pt{margin:14px 16px 4px;font-size:24px}.pt small{display:block;color:var(--mu);font:600 12px system-ui;letter-spacing:1px;margin-top:2px}
+.hero{display:block;position:relative;margin:10px 16px;border-radius:20px;overflow:hidden;height:230px;color:#fff;text-decoration:none;background:#000}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero .ov{position:absolute;inset:0;padding:16px;display:flex;flex-direction:column;justify-content:flex-end;background:linear-gradient(transparent 30%,rgba(0,0,0,.88))}
+.hero h2{margin:4px 0 0;font-size:20px;line-height:1.25}
+.nr{display:flex;gap:12px;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line);color:var(--tx);text-decoration:none}
+.nr:last-child{border:0}.nr div{flex:1}.nr h4{margin:4px 0 0;font-size:15px;line-height:1.3}
+.nr small,.hero small{font-size:12px;color:var(--mu)}.nr small b,.hero small b{color:var(--ac)}
+.hero small{color:#ffffffb0}
+img.th{width:78px;height:78px;border-radius:12px;object-fit:cover}
+.hero2{margin:10px 16px;padding:14px;border-radius:22px;background:linear-gradient(135deg,#7a1e2c,#1b1526 70%);border:1px solid var(--line)}
+.hh{display:flex;justify-content:space-between;align-items:center;font-size:12px}
+.pill{display:inline-block;background:rgba(255,255,255,.1);border-radius:99px;padding:5px 12px;font-size:12px;font-weight:700}
+.hm{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;text-align:center;gap:6px;margin-top:12px}
+.hm b{display:block;font-size:14px;margin-top:6px}
+.cr{display:grid;place-items:center;width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.08);margin:0 auto}
+.cr img{width:40px;height:40px}
+.sc{font-size:32px;font-weight:800}.sc small{display:block;font-size:12px;font-weight:600;color:var(--ac)}.sc small.lv{color:var(--live)}
+.form{display:flex;justify-content:center;gap:6px;margin-top:10px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--mu)}.dot.w{background:var(--ac)}.dot.l{background:var(--live)}
+.mh{display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
+.ib{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--tx);font-size:18px}
+.ml{font-weight:700;text-align:center}
+.big2{display:grid;grid-template-columns:1fr auto 1fr;gap:6px;align-items:center;text-align:center;padding:14px 16px}
+.big2 b{display:block;margin-top:8px}.big2 .cr{width:76px;height:76px}.big2 .cr img{width:48px;height:48px}.big2 .sc{font-size:40px}
+.seg2{display:flex;gap:6px;margin:8px 16px;padding:5px;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.seg2 button{flex:1;padding:10px;border:0;border-radius:10px;background:none;color:var(--mu);font:700 14px system-ui}
+.seg2 button.on{background:#22304d;color:var(--tx)}
+.lc2{display:block;margin:10px 16px;padding:16px;border-radius:22px;border:1px solid var(--line);min-height:120px}
+.lc2 .fl{width:20px;height:14px;object-fit:cover;border-radius:2px;margin-right:6px;vertical-align:middle}
+.lc2 h3{margin:6px 0 10px;font-size:22px;color:#fff}.lc2 small{font-size:12px;color:#ffffffb0}
+.lc2 .ld{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700}
 </style></head>
 <body>
 <header><div><span>ONSPORTS</span>.UZ</div><button id="lb">🌐</button></header>
 <div id="chips" class="chips"></div>
 <main id="out"></main>
-<nav><button data-t="h"></button><button data-t="w"></button><button data-t="m"></button><button data-t="c"></button></nav>
+<nav></nav>
 <div id="ov"></div>
 <script>
 const BOT="onsportsuz_bot";
 const RAW="https://raw.githubusercontent.com/jasurumirov0622-ux/futbolchi-app/main/data.json";
 const LG={PL:"Premier League",PD:"La Liga",SA:"Serie A",BL1:"Bundesliga",FL1:"Ligue 1",CL:"Champions League"};
 const I={
-uz:{nc:"Bu davlat klublari topilmadi",ct:"Sevimli davlatingizni tanlang",cl:"Sevimli klubingizni tanlang",sub:"🔔 Xabarnomani yoqish",skip:"O'tkazib yuborish",subh:"Jamoangiz o'ynaydigan kuni sizga xabar yuboramiz. Tugmani bosib botda tasdiqlang.",nx:"Kelgusi 5 ta o'yin",lt:"Oxirgi 5 ta o'yin",w:"Yangiliklar",nn:"Hozircha yangilik yo'q",h:"Bosh sahifa",m:"O'yinlar",c:"Musobaqalar",y:"Kecha",t:"Bugun",n:"Ertaga",news:"Futbol yangiliklari",live:"JONLI",ft:"Tugadi",none:"Bu kunda o'yinlar yo'q",soon:"Eng yaqin o'yinlar",load:"Yuklanmoqda…",err:"Ma'lumot yuklanmadi",x:"Yopish",goals:"Gollar",cards:"Kartochkalar",nodet:"Tafsilotlar hali yo'q",fix:"Jamoa o'yinlari",pick:"Tilni tanlang",nt:"Jadval hali tayyor emas",tm:"Jamoa",pt:"Ochko",og:"Avtogol",pen:"Penalti"},
-ru:{nc:"Клубы этой страны не найдены",ct:"Выберите любимую страну",cl:"Выберите любимый клуб",sub:"🔔 Включить уведомления",skip:"Пропустить",subh:"В день матча мы пришлём вам уведомление. Нажмите кнопку и подтвердите в боте.",nx:"Следующие 5 матчей",lt:"Последние 5 матчей",w:"Новости",nn:"Пока новостей нет",h:"Главная",m:"Матчи",c:"Турниры",y:"Вчера",t:"Сегодня",n:"Завтра",news:"Футбольные новости",live:"LIVE",ft:"Завершён",none:"В этот день матчей нет",soon:"Ближайшие матчи",load:"Загрузка…",err:"Не удалось загрузить данные",x:"Закрыть",goals:"Голы",cards:"Карточки",nodet:"Подробностей пока нет",fix:"Матчи команды",pick:"Выберите язык",nt:"Таблица пока не готова",tm:"Команда",pt:"Очки",og:"Автогол",pen:"Пенальти"},
-en:{nc:"No clubs found for this country",ct:"Choose your favourite country",cl:"Choose your favourite club",sub:"🔔 Turn on notifications",skip:"Skip",subh:"We'll message you on match day. Tap the button and confirm in the bot.",nx:"Next 5 matches",lt:"Last 5 matches",w:"News",nn:"No news yet",h:"Home",m:"Matches",c:"Competitions",y:"Yesterday",t:"Today",n:"Tomorrow",news:"Football news",live:"LIVE",ft:"FT",none:"No matches on this day",soon:"Upcoming matches",load:"Loading…",err:"Failed to load data",x:"Close",goals:"Goals",cards:"Cards",nodet:"No details yet",fix:"Team matches",pick:"Choose language",nt:"Table not ready yet",tm:"Team",pt:"Pts",og:"Own goal",pen:"Penalty"}};
+uz:{all:"Hammasi",ld:"YETAKCHI",yc:"SIZNING KLUBINGIZ",ov:"Sharh",tb:"Jadval",h2:"O'zaro",lgs:"Ligalar",nc:"Bu davlat klublari topilmadi",ct:"Sevimli davlatingizni tanlang",cl:"Sevimli klubingizni tanlang",sub:"🔔 Xabarnomani yoqish",skip:"O'tkazib yuborish",subh:"Jamoangiz o'ynaydigan kuni sizga xabar yuboramiz. Tugmani bosib botda tasdiqlang.",nx:"Kelgusi 5 ta o'yin",lt:"Oxirgi 5 ta o'yin",w:"Yangiliklar",nn:"Hozircha yangilik yo'q",h:"Bosh sahifa",m:"O'yinlar",c:"Musobaqalar",y:"Kecha",t:"Bugun",n:"Ertaga",news:"Futbol yangiliklari",live:"JONLI",ft:"Tugadi",none:"Bu kunda o'yinlar yo'q",soon:"Eng yaqin o'yinlar",load:"Yuklanmoqda…",err:"Ma'lumot yuklanmadi",x:"Yopish",goals:"Gollar",cards:"Kartochkalar",nodet:"Tafsilotlar hali yo'q",fix:"Jamoa o'yinlari",pick:"Tilni tanlang",nt:"Jadval hali tayyor emas",tm:"Jamoa",pt:"Ochko",og:"Avtogol",pen:"Penalti"},
+ru:{all:"Все",ld:"ЛИДЕР",yc:"ВАШ КЛУБ",ov:"Обзор",tb:"Таблица",h2:"Личные встречи",lgs:"Лиги",nc:"Клубы этой страны не найдены",ct:"Выберите любимую страну",cl:"Выберите любимый клуб",sub:"🔔 Включить уведомления",skip:"Пропустить",subh:"В день матча мы пришлём вам уведомление. Нажмите кнопку и подтвердите в боте.",nx:"Следующие 5 матчей",lt:"Последние 5 матчей",w:"Новости",nn:"Пока новостей нет",h:"Главная",m:"Матчи",c:"Турниры",y:"Вчера",t:"Сегодня",n:"Завтра",news:"Футбольные новости",live:"LIVE",ft:"Завершён",none:"В этот день матчей нет",soon:"Ближайшие матчи",load:"Загрузка…",err:"Не удалось загрузить данные",x:"Закрыть",goals:"Голы",cards:"Карточки",nodet:"Подробностей пока нет",fix:"Матчи команды",pick:"Выберите язык",nt:"Таблица пока не готова",tm:"Команда",pt:"Очки",og:"Автогол",pen:"Пенальти"},
+en:{all:"All",ld:"LEADER",yc:"YOUR CLUB",ov:"Summary",tb:"Table",h2:"Head to head",lgs:"Leagues",nc:"No clubs found for this country",ct:"Choose your favourite country",cl:"Choose your favourite club",sub:"🔔 Turn on notifications",skip:"Skip",subh:"We'll message you on match day. Tap the button and confirm in the bot.",nx:"Next 5 matches",lt:"Last 5 matches",w:"News",nn:"No news yet",h:"Home",m:"Matches",c:"Competitions",y:"Yesterday",t:"Today",n:"Tomorrow",news:"Football news",live:"LIVE",ft:"FT",none:"No matches on this day",soon:"Upcoming matches",load:"Loading…",err:"Failed to load data",x:"Close",goals:"Goals",cards:"Cards",nodet:"No details yet",fix:"Team matches",pick:"Choose language",nt:"Table not ready yet",tm:"Team",pt:"Pts",og:"Own goal",pen:"Penalty"}};
 const CC="AF AL DZ AD AO AG AR AM AU AT AZ BS BH BD BB BY BE BZ BJ BT BO BA BW BR BN BG BF BI KH CM CA CV CF TD CL CN CO KM CG CD CR CI HR CU CY CZ DK DJ DM DO EC EG SV GQ ER EE SZ ET FJ FI FR GA GM GE DE GH GR GD GT GN GW GY HT HN HK HU IS IN ID IR IQ IE IL IT JM JP JO KZ KE KP KR XK KW KG LA LV LB LS LR LY LI LT LU MG MW MY MV ML MT MR MU MX MD MC MN ME MA MZ MM NA NP NL NZ NI NE NG MK NO OM PK PS PA PG PY PE PH PL PT QA RO RU RW KN LC VC WS SM ST SA SN RS SC SL SG SK SI SB SO ZA SS ES LK SD SR SE CH SY TW TJ TZ TH TL TG TO TT TN TR TM UG UA AE GB US UY UZ VU VE VN YE ZM ZW".split(" ");
 const FDC={GB:"PL",ES:"PD",IT:"SA",DE:"BL1",FR:"FL1"};
 const ENO={TR:"Turkey",CZ:"Czech Republic",CI:"Ivory Coast"};
@@ -85,7 +128,7 @@ const dn=l=>{try{return new Intl.DisplayNames([l],{type:"region"})}catch(e){retu
 const flag=c=>`<img src="https://flagcdn.com/w40/${c.toLowerCase()}.png" alt="">`;
 function fq(v){v=v.toLowerCase();document.querySelectorAll("#cg button").forEach(b=>b.style.display=b.dataset.nm.toLowerCase().includes(v)?"":"none");}
 const NAMES={uz:"🇺🇿 O'zbekcha",ru:"🇷🇺 Русский",en:"🇬🇧 English"};
-let D={matches:[],tables:{},news:[],detail:{}},tab="h",day=0,lg="PD",L=null,fav=null,ob={s:"c",code:null,list:null};
+let D={matches:[],tables:{},news:[],detail:{}},tab="h",day=0,lg="PD",L=null,fav=null,ob={s:"c",code:null,list:null},cf="*",lgOpen=false;
 const $=s=>document.querySelector(s);
 const tg=window.Telegram&&Telegram.WebApp;if(tg){tg.ready();tg.expand();}
 const st=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){}};
@@ -99,6 +142,26 @@ function pickLang(){
   $("#out").innerHTML=`<div class="pick"><h3 style="margin:0;font-size:18px;color:var(--tx)">🌐 Til · Язык · Language</h3>`+
     Object.keys(NAMES).map(k=>`<button data-l="${k}">${NAMES[k]}</button>`).join("")+`</div>`;
 }
+const TD={united:"Юнайтед",city:"Сити",real:"Реал",fc:"ФК",cf:"КФ",sporting:"Спортинг",athletic:"Атлетик",atletico:"Атлетико",borussia:"Боруссия",bayern:"Бавария",olympique:"Олимпик",inter:"Интер",club:"Клуб",sc:"СК",afc:"АФК",dynamo:"Динамо",spartak:"Спартак",lokomotiv:"Локомотив"};
+function tl(n){
+  if(!n||!/[A-Za-z]/.test(n))return n;
+  const M=[["sch","щ"],["sh","ш"],["ch","ч"],["zh","ж"],["kh","х"],["ts","ц"],["ya","я"],["yu","ю"],["yo","ё"],["ph","ф"],["th","т"],["ck","к"],["ee","и"],["oo","у"],["ou","у"],["qu","кв"]];
+  const S={a:"а",b:"б",c:"к",d:"д",e:"е",f:"ф",g:"г",h:"х",i:"и",j:"дж",k:"к",l:"л",m:"м",n:"н",o:"о",p:"п",q:"к",r:"р",s:"с",t:"т",u:"у",v:"в",w:"в",x:"кс",y:"и",z:"з"};
+  return n.split(/(\s+|-)/).map(w=>{
+    if(!/[A-Za-z]/.test(w))return w;
+    const lw=w.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+    let r=TD[lw];
+    if(!r){r="";for(let i=0;i<lw.length;){const m=M.find(([k])=>lw.startsWith(k,i));
+      if(m){r+=m[1];i+=m[0].length;continue;}
+      const c=lw[i];r+=c==="c"&&/[eiy]/.test(lw[i+1]||"")?"с":(S[c]??c);i++;}}
+    return /^[A-Z]{2,3}$/.test(w)?r.toUpperCase():r.charAt(0).toUpperCase()+r.slice(1);
+  }).join("");
+}
+const tn=n=>L==="ru"?tl(n):n;
+function locD(){if(L!=="ru")return;
+  (D.matches||[]).forEach(m=>{m.h=tl(m.h);m.a=tl(m.a)});
+  Object.values(D.tables||{}).forEach(t=>t.forEach(r=>r.n=tl(r.n)));
+  Object.values(D.tm||{}).forEach(m=>{m.h=tl(m.h);m.a=tl(m.a)});}
 async function loadClubs(code){
   ob.list=null;if(FDC[code])return;
   try{const en=ENO[code]||dn("en").of(code);
@@ -115,77 +178,126 @@ function clubList(){
 function onboard(){
   $("#chips").innerHTML="";$("nav").style.display="none";let h;
   if(ob.s==="c"){const d=dn(L),nm=k=>d.of(k)||k;
-    h=`<h3 style="font-size:18px;color:var(--tx)">${T("ct")}</h3><input class="q" placeholder="🔍" oninput="fq(this.value)"><div class="grid" id="cg">`+[...CC].sort((a,b)=>nm(a).localeCompare(nm(b),L)).map(k=>`<button data-c="${k}" data-nm="${esc(nm(k))}">${flag(k)}<span>${esc(nm(k))}</span></button>`).join("")+`</div><button class="skip" data-skip>${T("skip")}</button>`;}
+    h=`<h3 style="font-size:18px;color:var(--tx)">${T("ct")}</h3><input class="q" placeholder="🔍" oninput="fq(this.value)"><div class="grid" id="cg">`+[...CC].sort((a,b)=>nm(a).localeCompare(nm(b),L)).map(k=>`<button data-c="${k}" data-nm="${esc(nm(k))}">${flag(k)}<span>${esc(nm(k))}</span></button>`).join("")+`</div>`;}
   else if(ob.s==="k"){const l=clubList();
-    h=`<h3 style="font-size:18px;color:var(--tx)">${T("cl")}</h3>`+(l===null?`<div class="empty">${T("load")}</div>`:l.length?`<div class="grid">`+[...l].sort((a,b)=>a.n.localeCompare(b.n)).map(r=>`<button data-club="${r.id}" data-n="${esc(r.n)}">${img(r.c)}<span>${esc(r.n)}</span></button>`).join("")+`</div>`:`<div class="empty">${T("nc")}</div>`)+`<button class="skip" data-back>←</button>`;}
-  else h=`<div class="pick"><div style="font-size:20px;font-weight:800">⭐ ${esc(fav.n)}</div><p style="color:var(--mu);text-align:center;max-width:290px;margin:0">${T("subh")}</p><button data-sub>${T("sub")}</button><button class="skip" data-skip>${T("skip")}</button></div>`;
+    h=`<h3 style="font-size:18px;color:var(--tx)">${T("cl")}</h3>`+(l===null?`<div class="empty">${T("load")}</div>`:l.length?`<input class="q" placeholder="🔍" oninput="fq(this.value)"><div class="grid" id="cg">`+[...l].sort((a,b)=>tn(a.n).localeCompare(tn(b.n),L)).map(r=>`<button data-club="${r.id}" data-n="${esc(tn(r.n))}" data-nm="${esc(tn(r.n)+" "+r.n)}">${img(r.c)}<span>${esc(tn(r.n))}</span></button>`).join("")+`</div>`:`<div class="empty">${T("nc")}</div>`)+`<button class="skip" data-back>←</button>`;}
+  else h=`<div class="pick"><div style="font-size:20px;font-weight:800">⭐ ${esc(fav.n)}</div><p style="color:var(--mu);text-align:center;max-width:290px;margin:0">${T("subh")}</p><button data-sub>${T("sub")}</button></div>`;
   $("#out").innerHTML=h;
 }
+const ICON={
+h:'<svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>',
+w:'<svg viewBox="0 0 24 24"><path d="M4 5h13v14H6a2 2 0 0 1-2-2zM17 9h3v8a2 2 0 0 1-2 2M7 9h7M7 13h7"/></svg>',
+m:'<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>',
+c:'<svg viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H4v2a3 3 0 0 0 4 3M16 6h4v2a3 3 0 0 1-4 3M12 13v4M8 21h8M10 17h4"/></svg>'};
+const LGS={PL:["gb","#4a1f7a,#1b1033"],PD:["es","#8a1a1a,#2a0c0c"],SA:["it","#0f4c9a,#0a1a3a"],BL1:["de","#a01818,#2a1010"],FL1:["fr","#0f3f7a,#0a1a30"],CL:["eu","#123a8a,#0a1230"]};
+function eta(u){const ms=new Date(u)-Date.now();if(ms<=0)return"";const d=Math.floor(ms/864e5),h=Math.floor(ms/36e5),mi=Math.max(1,Math.floor(ms/6e4));
+  const [n,k]=d>=1?[d,"d"]:h>=1?[h,"h"]:[mi,"m"];
+  return L==="uz"?`${n} ${{d:"kun",h:"soat",m:"daqiqa"}[k]}dan so'ng`:L==="ru"?`через ${n} ${{d:"дн.",h:"ч.",m:"мин."}[k]}`:`in ${n}${k}`;}
+function ago(d){if(!d)return"";const m=Math.max(1,Math.round((Date.now()-new Date(d))/6e4));
+  const [n,k]=m<60?[m,"m"]:m<1440?[Math.round(m/60),"h"]:[Math.round(m/1440),"d"];
+  return L==="uz"?`${n} ${{m:"daq",h:"soat",d:"kun"}[k]} oldin`:L==="ru"?`${n} ${{m:"мин",h:"ч",d:"дн"}[k]} назад`:`${n}${k} ago`;}
 function chips(){
-  let list,cur;
-  if(tab==="m"){list=[["-1",T("y")],["0",T("t")],["1",T("n")]];cur=String(day);}
-  else if(tab==="c"){list=Object.entries(LG);cur=lg;}
-  else{$("#chips").innerHTML="";return;}
-  $("#chips").innerHTML=list.map(([k,v])=>`<button class="chip ${k===cur?"on":""}" data-k="${k}">${v}</button>`).join("");
+  const el=$("#chips");if(tab!=="m"){el.innerHTML="";el.className="chips";return;}
+  el.className="chips seg";
+  el.innerHTML=[["-1",T("y")],["0",T("t")],["1",T("n")]].map(([k,v])=>`<button class="chip ${k===String(day)?"on":""}" data-k="${k}">${v}</button>`).join("");
 }
 function cards(ms,dt){
-  let comp="",h="";
+  let comp=null,h="";
   for(const m of ms){
-    if(m.comp!==comp){comp=m.comp;h+=`<h3>${esc(comp)}</h3>`;}
+    if(m.comp!==comp){if(comp!==null)h+="</div>";comp=m.comp;h+=`<div class="lg"><div class="lgh"><b>${esc(comp)}</b></div>`;}
     const live=m.st==="IN_PLAY"||m.st==="PAUSED",done=m.st==="FINISHED";
     const mid=live||done?`<div class="c ${live?"live":""}">${m.hs??0} : ${m.as??0}<small>${live?T("live"):T("ft")}</small></div>`
       :`<div class="c">${tm(m.utc)}${dt?`<small>${new Date(m.utc).toLocaleDateString("ru",{day:"2-digit",month:"2-digit"})}</small>`:""}</div>`;
     h+=`<div class="m" data-mid="${m.id}"><div class="t" data-tid="${m.hid}">${img(m.hc)}<b>${esc(m.h)}</b></div>${mid}<div class="t r" data-tid="${m.aid}"><b>${esc(m.a)}</b>${img(m.ac)}</div></div>`;
   }
-  return h;
+  return h+(comp!==null?"</div>":"");
 }
 const dayMs=d=>{const key=new Date(Date.now()+d*864e5).toLocaleDateString("sv");
   return D.matches.filter(m=>new Date(m.utc).toLocaleDateString("sv")===key).sort((a,b)=>a.utc<b.utc?-1:1);};
 function matches(){
-  const ms=dayMs(day);if(ms.length)return cards(ms,false);
-  const up=D.matches.filter(m=>new Date(m.utc)>new Date()&&m.st!=="FINISHED").sort((a,b)=>a.utc<b.utc?-1:1).slice(0,10);
-  return up.length?`<div class="empty">${T("none")}. ${T("soon")}:</div>`+cards(up,true):`<div class="empty">${T("none")}</div>`;
+  const all=dayMs(day);
+  if(!all.length){
+    const up=D.matches.filter(m=>new Date(m.utc)>new Date()&&m.st!=="FINISHED").sort((a,b)=>a.utc<b.utc?-1:1).slice(0,10);
+    return up.length?`<div class="empty">${T("none")}. ${T("soon")}:</div>`+cards(up,true):`<div class="empty">${T("none")}</div>`;
+  }
+  const cs=[...new Set(all.map(m=>m.comp))];if(cf!=="*"&&!cs.includes(cf))cf="*";
+  const ms=cf==="*"?all:all.filter(m=>m.comp===cf);
+  return `<div class="chips"><button class="chip ${cf==="*"?"on":""}" data-cf="*">${T("all")}<i>${all.length}</i></button>`+cs.map(c=>`<button class="chip ${c===cf?"on":""}" data-cf="${esc(c)}">${esc(c)}<i>${all.filter(m=>m.comp===c).length}</i></button>`).join("")+`</div>`+cards(ms,false);
 }
-function newsHtml(n){
+function newsHtml(n,hero){
   const a=(D.news||[]).slice(0,n);
-  if(!a.length)return `<div class="empty">${T("nn")}</div>`;
-  const dt=x=>x.date?new Date(x.date).toLocaleDateString("ru"):"";
-  const f=a[0];
-  const lead=`<a class="lead" href="${esc(f.link)}" target="_blank" rel="noopener">${f.img?`<img class="ph" src="${esc(f.img)}" alt="" loading="lazy">`:""}<h2>${esc(f.title)}</h2><p>${esc(f.text)}</p><small>${dt(f)}</small></a>`;
-  const rest=a.slice(1).map(x=>`<a class="art" href="${esc(x.link)}" target="_blank" rel="noopener">${x.img?`<img class="ph" src="${esc(x.img)}" alt="" loading="lazy">`:""}<h4>${esc(x.title)}</h4><p>${esc(x.text.slice(0,110))}</p><small>${dt(x)}</small></a>`).join("");
-  return `<div class="paper"><div class="mast"><b>ONSPORTS.UZ GAZETA</b><small>${new Date().toLocaleDateString("ru",{day:"numeric",month:"long",year:"numeric"})}</small></div>${lead}<div class="cols">${rest}</div></div>`;
+  let h=hero?`<h2 class="pt">${T("w")}<small>ONSPORTS.UZ GAZETA</small></h2>`:"";
+  if(!a.length)return h+`<div class="empty">${T("nn")}</div>`;
+  let rest=a;
+  if(hero&&a[0].img){const f=a[0];rest=a.slice(1);
+    h+=`<a class="hero" href="${esc(f.link)}" target="_blank" rel="noopener"><img src="${esc(f.img)}" alt=""><div class="ov"><small><b>ONSPORTS.UZ</b> ${ago(f.date)}</small><h2>${esc(f.title)}</h2></div></a>`;}
+  return h+`<div class="card">`+rest.map(x=>`<a class="nr" href="${esc(x.link)}" target="_blank" rel="noopener"><div><small><b>ONSPORTS.UZ</b> ${ago(x.date)}</small><h4>${esc(x.title)}</h4></div>${x.img?`<img class="th" src="${esc(x.img)}" alt="" loading="lazy">`:""}</a>`).join("")+`</div>`;
+}
+function homeHero(){
+  if(!fav)return"";
+  const id=fav.id,tt=(D.tt||{})[id];
+  const M=x=>Object.assign({},(D.tm||{})[x],D.matches.find(y=>y.id==x)||{});
+  if(!tt||!tt.n.length)return `<div class="hero2"><div class="hh"><span class="pill">${T("yc")}</span></div><h2 style="margin:12px 0 0">⭐ ${esc(fav.n)}</h2></div>`;
+  const m=M(tt.n[0]),live=m.st==="IN_PLAY"||m.st==="PAUSED";
+  const f=x=>{const a=x.hid==id?x.hs:x.as,b=x.hid==id?x.as:x.hs;return a>b?"w":a<b?"l":"d"};
+  const dots=tt.l.map(M).reverse().map(x=>`<i class="dot ${f(x)}"></i>`).join("");
+  return `<div class="hero2" data-mid="${m.id}"><div class="hh"><span class="pill">${T("yc")}</span><span>${live?T("live"):eta(m.utc)}</span></div>
+  <div class="hm"><div data-tid="${m.hid}"><span class="cr">${img(m.hc)}</span><b>${esc(m.h)}</b></div>
+  <div class="sc">${live?`${m.hs??0} : ${m.as??0}`:tm(m.utc)}<small>${new Date(m.utc).toLocaleDateString(L,{weekday:"short",day:"numeric",month:"short"})}</small></div>
+  <div data-tid="${m.aid}"><span class="cr">${img(m.ac)}</span><b>${esc(m.a)}</b></div></div><div class="form">${dots}</div></div>`;
 }
 function home(){
   const live=D.matches.filter(m=>m.st==="IN_PLAY"||m.st==="PAUSED");
   const td=dayMs(0);
-  let h=live.length?`<h3>🔴 ${T("live")}</h3>`+cards(live,false):"";
   const up=D.matches.filter(m=>new Date(m.utc)>new Date()&&m.st!=="FINISHED").sort((a,b)=>a.utc<b.utc?-1:1).slice(0,8);
+  let h=homeHero();
+  h+=live.length?`<h3>🔴 ${T("live")}</h3>`+cards(live,false):"";
   h+=`<h3>${T("t")}</h3>`+(td.length?cards(td,false):`<div class="empty">${T("none")}</div>`+(up.length?`<h3>${T("soon")}</h3>`+cards(up,true):""));
-  return h+`<h3>📰 ${T("news")}</h3>`+newsHtml(5);
+  return h+`<h3>📰 ${T("news")}</h3>`+newsHtml(5,false);
 }
 function tableRows(rows,hl){
   return `<div class="row h"><span>#</span><span>${T("tm")}</span><span>O</span><span>+/-</span><span>${T("pt")}</span></div>`+
    rows.map(r=>`<div class="row" ${r.id===hl?'style="color:var(--ac)"':""} data-tid="${r.id}"><span>${r.pos}</span><div class="n">${img(r.c)}<span>${esc(r.n)}</span></div><span>${r.p}</span><span>${r.gd}</span><b>${r.pts}</b></div>`).join("");
 }
-function comps(){const t=D.tables[lg];return t?tableRows(t):`<div class="empty">${T("nt")}</div>`;}
+function comps(){
+  if(lgOpen){const t=D.tables[lg];
+    return `<div class="mh"><button class="ib" data-lgback>←</button><div class="ml">${LG[lg]}</div><span class="ib" style="visibility:hidden"></span></div>`+(t?`<div class="card">${tableRows(t)}</div>`:`<div class="empty">${T("nt")}</div>`);}
+  return `<h2 class="pt">${T("lgs")}</h2>`+Object.keys(LG).map(k=>{
+    const [f,g]=LGS[k],t=D.tables[k],r=t&&t[0];
+    return `<div class="lc2" data-lg="${k}" style="background:linear-gradient(135deg,${g})"><img class="fl" src="https://flagcdn.com/w40/${f}.png" alt=""><h3>${LG[k]}</h3>`+(r?`<div class="ld"><small>${T("ld")}</small>${img(r.c)}<span>${esc(r.n)}</span><small>${r.pts} ${T("pt")}</small></div>`:"")+`</div>`;}).join("");
+}
 function render(){
   if(!L)return pickLang();
   if(ob.s!=="done")return onboard();
   $("nav").style.display="flex";
-  document.querySelectorAll("nav button").forEach(b=>{b.textContent=T(b.dataset.t);b.classList.toggle("on",b.dataset.t===tab);});
-  chips();$("#out").innerHTML=tab==="h"?home():tab==="w"?newsHtml(30):tab==="m"?matches():comps();
+  $("nav").innerHTML=["h","w","m","c"].map(k=>`<button data-t="${k}" class="${k===tab?"on":""}">${ICON[k]}<span>${T(k)}</span></button>`).join("");
+  chips();$("#out").innerHTML=tab==="h"?home():tab==="w"?newsHtml(30,true):tab==="m"?matches():comps();
 }
-function openMatch(id){
-  const m=D.matches.find(x=>x.id==id);if(!m)return;
+let mcur=null,mtab="o";
+function openMatch(id,tb){
+  const m=D.matches.find(x=>x.id==id)||Object.assign({},(D.tm||{})[id]);if(!m||!m.utc)return;
+  if(tb)mtab=tb;else if(id!=mcur)mtab="o";mcur=id;
   const d=(D.detail||{})[id],live=m.st==="IN_PLAY"||m.st==="PAUSED",done=m.st==="FINISHED";
   const side=t=>t===m.hid?m.h:m.a;
-  let h=`<div class="top"><b>${esc(m.comp)}</b><button data-close>${T("x")}</button></div>
-  <div class="big"><div data-tid="${m.hid}">${img(m.hc)}<b>${esc(m.h)}</b></div>
-  <div class="s ${live?"c live":""}">${live||done?`${m.hs??0} : ${m.as??0}`:tm(m.utc)}<small style="display:block;font-size:12px;color:var(--mu)">${live?T("live"):done?T("ft"):""}</small></div>
-  <div data-tid="${m.aid}">${img(m.ac)}<b>${esc(m.a)}</b></div></div>`;
-  if(d&&d.g&&d.g.length)h+=`<h3>⚽ ${T("goals")}</h3>`+d.g.map(g=>`<div class="ev"><i>${g.min}'</i><span>${esc(g.n)}${g.t==="OWN"?" ("+T("og")+")":g.t==="PENALTY"?" ("+T("pen")+")":""} — ${esc(side(g.tid))}</span></div>`).join("");
-  if(d&&d.c&&d.c.length)h+=`<h3>🟨 ${T("cards")}</h3>`+d.c.map(c=>`<div class="ev"><i>${c.min}'</i><span>${c.k==="RED"||c.k==="YELLOW_RED"?"🟥":"🟨"} ${esc(c.n)} — ${esc(side(c.tid))}</span></div>`).join("");
-  if(!d||(!(d.g||[]).length&&!(d.c||[]).length))h+=`<div class="empty">${T("nodet")}</div>`;
+  let h=`<div class="mh"><button class="ib" data-close>←</button><div class="ml">${esc(m.comp)}</div><span class="ib" style="visibility:hidden"></span></div>
+  <div style="text-align:center"><span class="pill">${new Date(m.utc).toLocaleDateString(L,{weekday:"short",day:"numeric",month:"short"})}</span></div>
+  <div class="big2"><div data-tid="${m.hid}"><span class="cr">${img(m.hc)}</span><b>${esc(m.h)}</b></div>
+  <div class="sc">${live||done?`${m.hs??0} : ${m.as??0}`:tm(m.utc)}<small class="${live?"lv":""}">${live?T("live"):done?T("ft"):eta(m.utc)}</small></div>
+  <div data-tid="${m.aid}"><span class="cr">${img(m.ac)}</span><b>${esc(m.a)}</b></div></div>
+  <div class="seg2">${[["o",T("ov")],["t",T("tb")],["h",T("h2")]].map(([k,v])=>`<button data-mt="${k}" class="${k===mtab?"on":""}">${v}</button>`).join("")}</div>`;
+  const none=`<div class="empty">${T("nodet")}</div>`;
+  if(mtab==="o"){
+    const ev=[...((d&&d.g)||[]).map(g=>({min:g.min,ic:"⚽",tx:esc(g.n)+(g.t==="OWN"?" ("+T("og")+")":g.t==="PENALTY"?" ("+T("pen")+")":""),tid:g.tid})),
+      ...((d&&d.c)||[]).map(c=>({min:c.min,ic:c.k==="RED"||c.k==="YELLOW_RED"?"🟥":"🟨",tx:esc(c.n),tid:c.tid}))].sort((a,b)=>(a.min||0)-(b.min||0));
+    h+=ev.length?`<div class="card">`+ev.map(e=>`<div class="ev"><i>${e.min}'</i><span>${e.ic} ${e.tx} — ${esc(side(e.tid))}</span></div>`).join("")+`</div>`:none;
+  }else if(mtab==="t"){
+    const k=Object.keys(D.tables||{}).sort(a=>a==="CL"?1:-1).find(k=>{const t=D.tables[k];return t.some(r=>r.id===m.hid)&&t.some(r=>r.id===m.aid);});
+    h+=k?`<div class="card">${tableRows(D.tables[k].filter(r=>r.id===m.hid||r.id===m.aid))}</div>`:none;
+  }else{
+    const all={};[...Object.values(D.tm||{}),...D.matches].forEach(x=>{if(x.st==="FINISHED"&&x.id!==m.id&&[x.hid,x.aid].includes(m.hid)&&[x.hid,x.aid].includes(m.aid))all[x.id]=x;});
+    const l=Object.values(all).sort((a,b)=>a.utc<b.utc?1:-1);
+    h+=l.length?cards(l,true):none;
+  }
   ov(h);
 }
 function openTeam(id){
@@ -207,26 +319,30 @@ function ov(h){const o=$("#ov");o.innerHTML=h;o.classList.add("on");o.scrollTop=
 document.body.onclick=e=>{
   const t=e.target;
   if(t.closest("[data-close]")){$("#ov").classList.remove("on");return;}
-  const l=t.closest("[data-l]");if(l){L=l.dataset.l;st("lang",L);render();return;}
+  const l=t.closest("[data-l]");if(l){L=l.dataset.l;st("lang",L);render();load();return;}
   if(t.closest("#lb")){L=null;fav=null;st("fav","");st("skip","");ob.s="c";render();return;}
   const oc=t.closest("[data-c]");if(oc){ob.code=oc.dataset.c;ob.s="k";loadClubs(ob.code);render();return;}
   const ok=t.closest("[data-club]");if(ok){fav={c:ob.code,id:ok.dataset.club,n:ok.dataset.n};st("fav",JSON.stringify(fav));ob.s="s";render();return;}
   if(t.closest("[data-back]")){ob.s="c";render();return;}
   if(t.closest("[data-skip]")){ob.s="done";st("skip","1");render();return;}
   if(t.closest("[data-sub]")){ob.s="done";render();const lk=`https://t.me/${BOT}?start=fav_${L}_${fav.id}`;tg?tg.openTelegramLink(lk):window.open(lk,"_blank");return;}
+  const cf2=t.closest("[data-cf]");if(cf2){cf=cf2.dataset.cf;render();return;}
+  const lgc=t.closest("[data-lg]");if(lgc){lg=lgc.dataset.lg;lgOpen=true;render();return;}
+  if(t.closest("[data-lgback]")){lgOpen=false;render();return;}
+  const mt2=t.closest("[data-mt]");if(mt2){openMatch(mcur,mt2.dataset.mt);return;}
   const ch=t.closest(".chip");if(ch){tab==="m"?day=+ch.dataset.k:lg=ch.dataset.k;render();return;}
-  const nb=t.closest("nav button");if(nb){tab=nb.dataset.t;$("#ov").classList.remove("on");render();return;}
+  const nb=t.closest("nav button");if(nb){tab=nb.dataset.t;lgOpen=false;$("#ov").classList.remove("on");render();return;}
   const te=t.closest("[data-tid]");if(te&&te.dataset.tid!=="null"){openTeam(te.dataset.tid);return;}
   const mt=t.closest("[data-mid]");if(mt)openMatch(mt.dataset.mid);
 };
 async function load(){
-  try{const r=await fetch(RAW+"?t="+Math.floor(Date.now()/60000));D=await r.json();}
+  try{const r=await fetch(RAW+"?t="+Math.floor(Date.now()/60000));D=await r.json();locD();}
   catch(e){if(L)$("#out").innerHTML=`<div class="empty">${T("err")}</div>`;return;}
-  if(!$("#ov").classList.contains("on")&&L&&ob.s!=="c")render();
+  if(!$("#ov").classList.contains("on")&&L&&!(ob.s==="c"||(ob.s==="k"&&clubList())))render();
 }
 L=st("lang");
 try{fav=JSON.parse(st("fav")||"null");}catch(e){}
-ob.s=(fav||st("skip"))?"done":"c";
+ob.s=fav?"done":"c";
 if(!L){const c=((tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user||{}).language_code||"").slice(0,2);L=null;}
 render();load();setInterval(load,60000);
 </script></body></html>
