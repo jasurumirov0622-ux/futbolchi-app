@@ -284,7 +284,8 @@ const dayMs=d=>{const key=new Date(Date.now()+d*864e5).toLocaleDateString("sv");
 function matches(){
   const all=dayMs(day);
   if(!all.length){
-    return `<div class="empty">${T("none")}</div>`;
+    const nw=new Date().toISOString(),up=D.matches.filter(m=>m.utc>nw&&m.st!=="FINISHED").sort((a,b)=>a.utc<b.utc?-1:1).slice(0,12);
+    return `<div class="empty">${T("none")}</div>`+(up.length?`<h3>${T("soon")}</h3>`+cards(up,true):"");
   }
   const cs=[...new Set(all.map(m=>m.comp))];if(cf!=="*"&&!cs.includes(cf))cf="*";
   const ms=cf==="*"?all:all.filter(m=>m.comp===cf);
